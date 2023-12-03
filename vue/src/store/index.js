@@ -1,11 +1,12 @@
 import { createStore as _createStore } from 'vuex';
 import axios from 'axios';
-
 export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      //the zipcode input from the user that should be stored and accessible globally
+      zipcodeInput: ''
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -23,6 +24,9 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
+      },
+      SET_ZIPCODE(state, zipcodeInput) {
+        state.zipcodeInput = zipcodeInput;
       }
     },
   });
