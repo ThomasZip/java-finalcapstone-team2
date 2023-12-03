@@ -1,0 +1,32 @@
+<template>
+    <h1>Search for Restaurants</h1>
+    <form v-on:submit.prevent="addZipcode" class="zipcode-form">
+        <div class="field">
+            <label for="zipcodeInput">Enter a Zipcode: </label>
+            <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput"/>
+            <p>{{ zipcodeInput }}</p>
+        </div>
+        <button type="submit" value="Save" class="btn save">Go</button>
+    </form>
+</template>
+
+<script>
+import RestaurantCard from '../components/RestaurantCard.vue';
+
+export default {
+    data() {
+        return {
+            zipcodeInput: ''
+        };
+    },
+    methods: {
+        addZipcode() {
+            this.$store.commit('SET_ZIPCODE');
+        }
+    }
+};
+</script>
+
+<style>
+
+</style>
