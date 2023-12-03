@@ -9,8 +9,8 @@ public class Application {
 
     public static void main(String[] args) {
         BusinessSearchService businessSearchService = new BusinessSearchService();
-        businessSearchService.getRestaurantsByZip("44103");
-//        SpringApplication.run(Application.class, args);
+//        businessSearchService.getRestaurantsByZip("44103");
+        SpringApplication.run(Application.class, args);
     }
 
 }

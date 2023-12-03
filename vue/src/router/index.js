@@ -47,6 +47,11 @@ const routes = [
     meta: {
       requiresAuth: false
     }
+  }, 
+  {
+    path: "/restaurantsSearch/:zip", 
+    name: "restaurantsByZip", 
+    
   }
 ];
 

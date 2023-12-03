@@ -1,16 +1,18 @@
 package com.techelevator.Services;
 
+import com.techelevator.dao.RestaurantSearchDao;
 import com.techelevator.model.BusinessSearchDao;
 import com.techelevator.model.YelpApiResponse;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-
-public class BusinessSearchService {
+@Component
+public class BusinessSearchService implements RestaurantSearchDao {
     private static final String YELP_API_BASE_URL = "https://api.yelp.com/v3/businesses/search?location=";
     private static final String YELP_SEARCH_LIMIT_URL = "&sort_by=best_match&limit=";
     private static final String YELP_SEARCH_LIMIT_NUM = "20";
@@ -19,7 +21,7 @@ public class BusinessSearchService {
 
 
 
-
+    @Override
     public YelpApiResponse getRestaurantsByZip(String zipCode){
         YelpApiResponse yelpApiResponse = new YelpApiResponse();
 
