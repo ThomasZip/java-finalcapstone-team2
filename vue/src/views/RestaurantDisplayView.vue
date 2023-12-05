@@ -13,8 +13,10 @@ export default {
     },
     data() {
         return {
-            restaurants: [],
-            zipcode: this.$store.state.zipcodeInput
+            restaurants: {
+                businesses: []
+            }
+            
         }
     },
     methods: {
