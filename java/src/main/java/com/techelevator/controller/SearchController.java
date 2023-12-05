@@ -15,9 +15,14 @@ public class SearchController {
         this.restaurantSearchDao = restaurantSearchDao;
     }
 
+    @RequestMapping(path = "search/{zipCode}/{category}", method = RequestMethod.GET)
+    public YelpApiResponse getRestaurantsByZipPlusCategory(@PathVariable("zipCode") String zipCode, @PathVariable("category") String category){
+        return restaurantSearchDao.getRestaurantsByZipAndCategory(zipCode, category);
+    }
+
     @RequestMapping(path = "search/{zipCode}", method = RequestMethod.GET)
-    public YelpApiResponse getRestaurantsByZip(@PathVariable("zipCode") String zipCode){
-        return restaurantSearchDao.getRestaurantsByZip(zipCode);
+    public YelpApiResponse getRestaurantsByZipPlusCategory(@PathVariable("zipCode") String zipCode){
+        return restaurantSearchDao.getRestaurantsByZipOnly(zipCode);
     }
 
 }
