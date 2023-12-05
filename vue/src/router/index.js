@@ -58,7 +58,7 @@ const routes = [
     }
   }, 
   {
-    path: "/restaurantsSearch/display", 
+    path: "/restaurantsSearch/display/", 
     name: "restaurant-display", 
     component: RestaurantDisplayView, 
     meta: {
