@@ -58,7 +58,7 @@ const routes = [
     }
   }, 
   {
-    path: "/restaurantsSearch/display/", 
+    path: "/restaurantsSearch/:zipCode/", 
     name: "restaurant-display", 
     component: RestaurantDisplayView, 
     meta: {

@@ -2,13 +2,11 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RestaurantSearchDao;
 import com.techelevator.model.YelpApiResponse;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/restaurants/")
+@CrossOrigin(origins = "http://127.0.0.1:5174")
 public class SearchController {
 
     private final RestaurantSearchDao restaurantSearchDao;

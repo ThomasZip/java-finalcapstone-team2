@@ -19,15 +19,16 @@ export default {
             
         }
     },
-    methods: {
-        created() {
-            restaurantService.getRestaurantsByZip(this.zipcode)
-                .then((response) => {
-                    this.restaurants = response.data;
-                    console.log(this.restaurants)
-                })
-        }
-    }
+    // methods: {
+    //     created() {
+    //         restaurantService.getRestaurantsByZip( 
+    //         )
+    //             .then((response) => {
+    //                 this.businesses = response.data;
+    //                 console.log(this.restaurants)
+    //             })
+    //     }
+    // }
 }
 
 
