@@ -48,8 +48,6 @@ export default {
   background-color: rgb(139, 228, 139);
 }
 
-
-
 h1, p {
   text-align: center;
 }

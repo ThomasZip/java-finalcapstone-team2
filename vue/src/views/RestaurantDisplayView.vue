@@ -2,12 +2,11 @@
     <div id="main-div">
     <h1>Restaurants List</h1>
     <RestaurantCard/>
-        </div>
+    </div>
 </template>
 <script>
 import restaurantService from '../services/RestaurantService';
 import RestaurantCard from '../components/RestaurantCard.vue';
-
 export default {
     components: {
         RestaurantCard
@@ -17,7 +16,6 @@ export default {
             restaurants: {
                 businesses: []
             }
-            
         }
     },
     methods: {
@@ -30,15 +28,24 @@ export default {
         // }
     }
 }
-
-
 </script>
 <style>
 #main-div {
   background-color: rgb(139, 228, 139);
   margin-top: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 20px;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
