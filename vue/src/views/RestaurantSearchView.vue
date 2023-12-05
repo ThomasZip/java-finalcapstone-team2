@@ -49,23 +49,22 @@ export default {
 
 <style>
 #search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding: 20px;
-    background-color: rgb(139, 228, 139);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 20px;
+  background-color: rgb(139, 228, 139);
 }
 
-h1,
-p {
-    text-align: center;
+h1, p {
+  text-align: center;
 }
 
 #button-div {
-    text-align: center;
+  text-align: center;
 }
 
 .form-input-group {

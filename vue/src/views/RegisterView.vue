@@ -17,11 +17,14 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
+      <div id="button-div">
       <button type="submit">Create Account</button>
+      </div>
       <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
   </div>
 </template>
+
 
 <script>
 import authService from '../services/AuthService';
