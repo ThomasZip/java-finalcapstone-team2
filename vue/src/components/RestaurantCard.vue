@@ -6,7 +6,7 @@
     </div>
     <div id="text-div">
       <div id="name">
-        <router-link v-bind:to="{ name: 'details' ,params: {id:restaurant.id}}">
+        <router-link v-bind:to="{ name: 'details', params: { id: restaurant.id } }">
           <h3>{{ restaurant.name }}</h3>
         </router-link>
       </div>
@@ -19,30 +19,33 @@
     </div>
   </div>
 </template>
-  <script>
-      import RestaurantService from '../services/RestaurantService';
-      export default {
-    data() {
-      return {
-        businesses: {
-          //restaurants: []
-        }
-      };
-    },
-    methods: {
-      getListOfBusinesses(zipCode){
-        RestaurantService.getRestaurantsByZip(zipCode)
-          .then((response)=>{
-            this.businesses = response.data;
-          })
-          //TODO: exception handling
+
+<script>
+import RestaurantService from '../services/RestaurantService';
+export default {
+  data() {
+    return {
+      businesses: {
+        //restaurants: []
       }
-    },
-    created() {
-      this.getListOfBusinesses(this.$route.params.zipCode)
+    };
+  },
+  methods: {
+    getListOfBusinesses(zipCode, category) {
+      RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
+        .then((response) => {
+          this.businesses = response.data;
+        })
+      //TODO: exception handling
     }
-  };
-  </script>
+
+  },
+  created() {
+    this.getListOfBusinesses(this.$route.params.zipCode, this.$route.params.category)
+  }
+}
+</script>
+  
 
   <style>
   #pic{

@@ -59,8 +59,8 @@ const routes = [
     }
   }, 
   {
-    path: "/restaurantsSearch/:zipCode/", 
-    name: "restaurant-display", 
+    path: "/restaurantsSearch/:zipCode/:category", 
+    name: "restaurant-display-zip-category", 
     component: RestaurantDisplayView, 
     meta: {
       requiresAuth: true
@@ -73,6 +73,15 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  }, 
+  {
+    path: "/restaurantsSearch/:zipCode", 
+    name: "restaurant-display-zip", 
+    component: RestaurantDisplayView, 
+    meta:{
+      requiresAuth: true
+    }
+
   }
 ];
 // Create the router

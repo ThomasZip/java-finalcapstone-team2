@@ -5,7 +5,11 @@ const baseUrl = axios.create({
 });
 
 export default{
-    getRestaurantsByZip(zipCode){
+    getRestaurantsByZipAndCategory(zipCode, category){
+        return baseUrl.get(`/api/restaurants/search/${zipCode}/${category}`)
+    }, 
+
+    getRestaurantsByZipOnly(zipCode){
         return baseUrl.get(`/api/restaurants/search/${zipCode}`)
     }
 }
