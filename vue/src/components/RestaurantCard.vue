@@ -1,8 +1,7 @@
 <template>
 <!-- Hold individual sections for each restaurant ex: div v-for -->
-<h1>test</h1>
 <div>
-  <!-- <div v-for="business in businesses.restaurants" v-bind:key="business.id">
+  <!-- <div v-for="business in businesses" v-bind:key="business.id">
     <h2>{{ business.business.name }}</h2>
     <p>Rating: {{ business.rating }}</p>
     <p>Price: {{ business.price }}</p>
@@ -12,6 +11,12 @@
     <hr/>
 
   </div> -->
+  <div v-for="restaurant in businesses.businesses" v-bind:key="restaurant.id">
+    <h2>{{ restaurant.name }}</h2>
+    <p>{{ restaurant.location.address1 }}</p>
+  
+  </div>
+
   
 </div>
 
@@ -48,5 +53,19 @@
 
 </script>
 <style>
+h1 {
+  text-align: center;
+  font-size: 70px;
+}
+
+div.h2 {
+  text-align: left;
+  font-size: 60px;
+}
+
+p {
+  text-align: left;
+  font-size: 15px;
+}
 
 </style>
