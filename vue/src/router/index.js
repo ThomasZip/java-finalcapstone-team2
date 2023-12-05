@@ -50,7 +50,7 @@ const routes = [
     }
   },
   {
-    path: "/restaurantsSearch",
+    path: "/restaurantsSearch/",
     name: "restaurantsSearch",
     component: RestaurantSearchView,
     meta: {

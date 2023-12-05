@@ -1,16 +1,17 @@
 <template>
 <!-- Hold individual sections for each restaurant ex: div v-for -->
 <div>
-  <div v-for="object in businesses" v-bind:key="object.id">
-    <h2>{{ object.name }}</h2>
-    <p>Rating: {{ object.rating }}</p>
-    <p>Price: {{ object.price }}</p>
-    <p>Address: {{ object.location.address1 }}, {{ business.location.city }}, {{ object.location.state }}</p>
-    <p>Phone: {{ object.display_phone }}</p>
-    <img v-bind:src="object.image_url"  style="max-width: 200px; max-height: 150px;">
+  <!-- <div v-for="business in businesses.restaurants" v-bind:key="business.id">
+    <h2>{{ business.business.name }}</h2>
+    <p>Rating: {{ business.rating }}</p>
+    <p>Price: {{ business.price }}</p>
+    <p>Address: {{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }}</p>
+    <p>Phone: {{ business.display_phone }}</p>
+    <img v-bind:src="business.image_url"  style="max-width: 200px; max-height: 150px;">
     <hr/>
 
-  </div>
+  </div> -->
+  
 </div>
 
 </template>
@@ -21,22 +22,23 @@
   data() {
     return {
       businesses: {
-        
+        //restaurants: []
       }
     };
   },
 
   methods: {
-    getListOfBusinesses(id){
-      RestaurantService.getRestaurantsByZip(id)
-      .then((response)=>{
-        this.businesses = response.data;
-      })
-      // error handling needs done here
-    }, 
-    created(){
-      this.getListOfBusinesses(this.$route.params.zipCode)
+    getListOfBusinesses(zipCode){
+      RestaurantService.getRestaurantsByZip(zipCode)
+        .then((response)=>{
+          this.businesses = response.data;
+        })
+        //TODO: exception handling
     }
+    
+  },
+  created() {
+    this.getListOfBusinesses(this.$route.params.zipCode)
   }
   
 
