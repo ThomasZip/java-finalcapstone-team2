@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-import RestaurantCard from '../components/RestaurantCard.vue';
+
 export default {
     data() {
         return {
@@ -25,7 +25,6 @@ export default {
         onSubmit() {
             this.addZipcode();
             this.goToRestaurantDisplayView();
-
         },
         addZipcode() {
             this.$store.commit('SET_ZIPCODE', this.zipcodeInput);
@@ -59,8 +58,7 @@ h1, p {
   text-align: center;
 }
 
-.form-input-group{
-  display: flex;
-  justify-content: space-between;
-}
-</style>
+.form-input-group {
+    display: flex;
+    justify-content: space-between;
+}</style>

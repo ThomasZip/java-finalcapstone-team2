@@ -1,8 +1,8 @@
 <template>
     <div id="main-div">
     <h1>Restaurants List</h1>
-    <RestaurantCard />
-    </div>
+    <RestaurantCard/>
+        </div>
 </template>
 <script>
 import restaurantService from '../services/RestaurantService';
