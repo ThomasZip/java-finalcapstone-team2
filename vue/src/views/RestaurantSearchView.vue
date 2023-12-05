@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         addZipcode() {
-            this.$store.commit('SET_ZIPCODE');
+            this.$store.commit('SET_ZIPCODE', this.zipcodeInput);
         }
     }
 };
