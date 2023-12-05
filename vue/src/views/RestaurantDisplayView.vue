@@ -4,7 +4,6 @@
 
 </template>
 <script>
-import restaurantService from '../services/RestaurantService';
 import RestaurantCard from '../components/RestaurantCard.vue';
 
 export default {
@@ -20,13 +19,7 @@ export default {
         }
     },
     methods: {
-        // created() {
-        //     restaurantService.getRestaurantsByZip(this.zipCode)
-        //         .then((response) => {
-        //             this.restaurants = response.data;
-        //             console.log(this.restaurants)
-        //         })
-        // }
+       
     }
 }
 

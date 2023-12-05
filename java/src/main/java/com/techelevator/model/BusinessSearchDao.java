@@ -21,7 +21,9 @@ public class BusinessSearchDao {
     @JsonProperty("display_phone")
     private String displayPhone;
 
-    public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone) {
+    private Coordinates coordinates;
+
+    public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone, Coordinates coordinates) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
@@ -31,6 +33,7 @@ public class BusinessSearchDao {
         this.price = price;
         this.location = address;
         this.displayPhone = displayPhone;
+        this.coordinates = coordinates;
     }
     public BusinessSearchDao(){}
 
@@ -105,5 +108,13 @@ public class BusinessSearchDao {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 }
