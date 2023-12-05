@@ -6,6 +6,6 @@ const baseUrl = axios.create({
 
 export default{
     getRestaurantsByZip(zipCode){
-        return baseUrl.get(`/api/restaurants/${zipCode}`)
+        return baseUrl.get(`/api/restaurants/search/${zipCode}`)
     }
 }
