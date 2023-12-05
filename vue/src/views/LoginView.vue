@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-.form-input-group { 
+.form-input-group {
   /* input boxes */
   margin-bottom: 1rem;
 }
@@ -71,7 +71,6 @@ label {
    /* input boxes */
   margin-right: 0.5rem;
 }
-
 #login {
   display: flex;
   justify-content: center;
@@ -81,15 +80,12 @@ label {
   margin-right: 30%;
   background-color: rgb(184, 167, 167);
 }
-
 h1, p {
   text-align: center;
 }
-
 #button-div {
   text-align: center;
 }
-
 .form-input-group{
   display: flex;
   justify-content: space-between;

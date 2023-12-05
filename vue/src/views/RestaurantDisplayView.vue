@@ -21,13 +21,13 @@ export default {
         }
     },
     methods: {
-        created() {
-            restaurantService.getRestaurantsByZip(this.zipcode)
-                .then((response) => {
-                    this.restaurants = response.data;
-                    console.log(this.restaurants)
-                })
-        }
+        // created() {
+        //     restaurantService.getRestaurantsByZip(this.zipCode)
+        //         .then((response) => {
+        //             this.restaurants = response.data;
+        //             console.log(this.restaurants)
+        //         })
+        // }
     }
 }
 

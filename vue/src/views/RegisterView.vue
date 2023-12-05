@@ -25,6 +25,7 @@
   </div>
 </template>
 
+
 <script>
 import authService from '../services/AuthService';
 
@@ -81,7 +82,6 @@ export default {
 label {
   margin-right: 0.5rem;
 }
-
 #register {
   display: flex;
   justify-content: center;
@@ -91,15 +91,12 @@ label {
   margin-right: 30%;
   background-color: rgb(184, 167, 167);
 }
-
 h1, p {
   text-align: center;
 }
-
 #button-div {
   text-align: center;
 }
-
 .form-input-group{
   display: flex;
   justify-content: space-between;
