@@ -1,6 +1,6 @@
 <template>
     <h1>Restaurants List</h1>
-    <RestaurantCard />
+    <RestaurantCard/>
 
 </template>
 <script>
