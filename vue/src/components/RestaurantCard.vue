@@ -1,7 +1,7 @@
 <template>
 <!-- Hold individual sections for each restaurant ex: div v-for -->
 <h1>test</h1>
-<div>
+<div id="card-div">
   <div v-for="business in businesses" v-bind:key="business.id">
     <h2>{{ business.name }}</h2>
     <p>Rating: {{ business.rating }}</p>
@@ -42,5 +42,7 @@
 
 </script>
 <style>
-
+#card-div{
+  background-color: rgb(211, 238, 92);
+}
 </style>

@@ -1,16 +1,19 @@
 <template>
-    <div id="zipcode-form">
-    <form v-on:submit.prevent="addZipcode" class="zipcode-form">
-        <div class="field">
-            <h1>Search for Restaurants</h1>
-            <label for="zipcodeInput">Enter a Zipcode: </label>
-            <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput"/>
-            <p>{{ zipcodeInput }}</p>
-        </div>
-        <div id="button-div">
-        <button type="submit" value="Save" class="btn save">Go</button>
-        </div>
-    </form>
+    <div id="search-form">
+        <form v-on:submit.prevent="addZipcode" class="zipcode-form">
+            <!--v-on:submit.prevent="addZipcode"-->
+            <form class="zipcode-form" v-on:submit.prevent="onSubmit">
+                <div class="field">
+                    <h1>Search for Restaurants</h1>
+                    <label for="zipcodeInput">Enter a Zipcode: </label>
+                    <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput" />
+                    <p>{{ zipcodeInput }}</p>
+                </div>
+                <div id="button-div">
+                    <button type="submit" value="Save" class="btn save">Go</button>
+                </div>
+            </form>
+        </form>
     </div>
 </template>
 <script>
@@ -22,14 +25,22 @@ export default {
         };
     },
     methods: {
+        onSubmit() {
+            this.addZipcode();
+            this.goToRestaurantDisplayView();
+
+        },
         addZipcode() {
             this.$store.commit('SET_ZIPCODE', this.zipcodeInput);
+        },
+        goToRestaurantDisplayView() {
+            this.$router.push({name:'restaurant-display', params: {zipCode: this.zipcodeInput}});
         }
     }
 };
 </script>
 <style>
-#zipcode-form {
+#search-form {
   display: flex;
   justify-content: center;
   align-items: center;

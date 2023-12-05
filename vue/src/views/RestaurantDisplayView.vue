@@ -1,7 +1,8 @@
 <template>
+    <div id="main-div">
     <h1>Restaurants List</h1>
     <RestaurantCard />
-
+    </div>
 </template>
 <script>
 import restaurantService from '../services/RestaurantService';
@@ -32,4 +33,12 @@ export default {
 
 
 </script>
-<style></style>
+<style>
+#main-div {
+  background-color: rgb(139, 228, 139);
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 20px;
+}
+</style>
