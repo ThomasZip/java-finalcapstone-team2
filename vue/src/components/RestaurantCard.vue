@@ -6,7 +6,7 @@
     </div>
     <div id="text-div">
       <div id="name">
-        <router-link v-bind:to="{ name: 'details' }">
+        <router-link v-bind:to="{ name: 'details' ,params: {id:restaurant.id}}">
           <h3>{{ restaurant.name }}</h3>
         </router-link>
       </div>

@@ -67,7 +67,7 @@ const routes = [
     }
   },
   {
-    path: "/restaurant-details",
+    path: "/restaurantsSearch/id/",
     name: "details",
     component: RestaurantDetailsView,
     meta: {
