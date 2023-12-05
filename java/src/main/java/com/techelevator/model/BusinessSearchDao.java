@@ -21,6 +21,8 @@ public class BusinessSearchDao {
     private String displayPhone;
     private Coordinates coordinates;
 
+    private Coordinates coordinates;
+
     public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone, Coordinates coordinates) {
         this.id = id;
         this.name = name;

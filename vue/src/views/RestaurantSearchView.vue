@@ -5,7 +5,10 @@
                 <h1>Search for Restaurants</h1>
                 <label for="zipcodeInput">Enter a Zipcode: </label>
                 <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput" />
-                <p>{{ zipcodeInput }}</p>
+
+                <label for="userCategory">Enter a Cuisine (Greek, Tacos, Noodles, etc): </label>
+                <input id="userCategoryId" name="userCategory" type="text" v-model="userCategory" v-bind:required="false" />
+                
             </div>
             <div id="button-div">
                 <button type="submit" value="Save" class="btn save">Go</button>
@@ -18,19 +21,27 @@
 export default {
     data() {
         return {
-            zipcodeInput: ''
+            zipcodeInput: '',
+            userCategory: ''
         };
     },
     methods: {
         onSubmit() {
-            this.addZipcode();
-            this.goToRestaurantDisplayView();
+            if(this.userCategory === ''){
+                this.goToRestaurantDisplayViewZip();
+
+            }else{this.goToRestaurantDisplayViewZipAndCategory();}
+            
         },
-        addZipcode() {
-            this.$store.commit('SET_ZIPCODE', this.zipcodeInput);
-        },
-        goToRestaurantDisplayView() {
-            this.$router.push({ name: 'restaurant-display', params: { zipCode: this.zipcodeInput } });
+        // addZipcode() {
+        //     this.$store.commit('SET_ZIPCODE', this.zipcodeInput);
+        // },
+        goToRestaurantDisplayViewZipAndCategory() {
+            this.$router.push({ name: 'restaurant-display-zip-category', params: { zipCode: this.zipcodeInput, category: this.userCategory }});
+        }, 
+
+        goToRestaurantDisplayViewZip(){
+            this.$router.push({name: 'restaurant-display-zip', params:{zipCode: this.zipcodeInput}})
         }
     }
 };

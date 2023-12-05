@@ -30,8 +30,8 @@
   },
 
   methods: {
-    getListOfBusinesses(zipCode){
-      RestaurantService.getRestaurantsByZip(zipCode)
+    getListOfBusinesses(zipCode, category){
+      RestaurantService.getRestaurantsByZipAndCategory(zipCode,category)
         .then((response)=>{
           this.businesses = response.data;
         })
@@ -40,7 +40,7 @@
     
   },
   created() {
-    this.getListOfBusinesses(this.$route.params.zipCode)
+    this.getListOfBusinesses(this.$route.params.zipCode, this.$route.params.category)
   }
   
 

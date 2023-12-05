@@ -1,7 +1,6 @@
 package com.techelevator.model;
 
 public class Coordinates {
-
     private String latitude;
     private String longitude;
 
@@ -9,8 +8,7 @@ public class Coordinates {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-    public Coordinates() {}
+    public Coordinates(){}
 
     public String getLatitude() {
         return latitude;
