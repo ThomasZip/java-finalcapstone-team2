@@ -6,7 +6,9 @@
     </div>
     <div id="text-div">
       <div id="name">
-        <h3>{{ restaurant.name }}</h3>
+        <router-link v-bind:to="{ name: 'details' }">
+          <h3>{{ restaurant.name }}</h3>
+        </router-link>
       </div>
       <div id="rating">
         <p>Rating: {{ restaurant.rating }}</p>
@@ -46,8 +48,6 @@
   #pic{
     max-height: 200px;
     max-width: 200px;
-    overflow: hidden;
-    position: absolute;
   }
   #restaurant-card {
     background-color: rgb(218, 235, 122);
