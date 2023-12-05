@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-import RestaurantCard from '../components/RestaurantCard.vue';
+
 export default {
     data() {
         return {
