@@ -1,14 +1,14 @@
 <template>
     <div id="main-div">
     <h1>Restaurants List</h1>
-    <RestaurantCard/>
+    <RestaurantList/>
     </div>
 </template>
 <script>
-import RestaurantCard from '../components/RestaurantCard.vue';
+import RestaurantList from '../components/RestaurantList.vue';
 export default {
     components: {
-        RestaurantCard
+        RestaurantList
     },
     data() {
         return {
