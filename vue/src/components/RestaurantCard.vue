@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
-      RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
+      RestaurantService.getRestaurantsByZipAndCategory(zipCode, category.toLowerCase())
         .then((response) => {
           this.businesses = response.data;
         })
