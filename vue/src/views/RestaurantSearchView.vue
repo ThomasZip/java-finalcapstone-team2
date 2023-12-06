@@ -3,12 +3,14 @@
         <form class="zipcode-form" v-on:submit.prevent="onSubmit">
             <div class="field">
                 <h1>Search for Restaurants</h1>
-                <label for="zipcodeInput">Enter a Zipcode: </label>
-                <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput" />
-
-                <label for="userCategory">Enter a Cuisine (Greek, Tacos, Noodles, etc): </label>
-                <input id="userCategoryId" name="userCategory" type="text" v-model="userCategory" v-bind:required="false" />
-                
+                <div class="input-div">
+                <label for="zipcodeInput">Enter a Zipcode (required):<br>&nbsp;</label>
+                <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput"  @keydown.space.prevent/>
+                </div>
+                <div class="input-div">
+                <label for="userCategory">Enter a Cuisine (optional):<br> i.e. Greek, tacos, noodles, etc&nbsp;&nbsp;</label>
+                <input id="userCategoryId" name="userCategory" type="text" v-model="userCategory" v-bind:required="false" @keydown.space.prevent/>
+                </div>
             </div>
             <div id="button-div">
                 <button type="submit" value="Save" class="btn save">Go</button>
@@ -65,9 +67,24 @@ h1, p {
 
 #button-div {
   text-align: center;
+  padding-top: 15px;
+}
+
+button {
+    height: 30px;
+    width: 90px;
 }
 
 .form-input-group {
     display: flex;
     justify-content: space-between;
-}</style>
+}
+
+.input-div {
+    padding: 5px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+</style>

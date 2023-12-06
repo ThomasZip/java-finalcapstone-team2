@@ -9,10 +9,10 @@
     </div>
 </template>
 <script>
-import RestaurantCard from '../components/RestaurantCard.vue';
+import RestaurantList from '../components/RestaurantList.vue';
 export default {
     components: {
-        RestaurantCard
+        
     },
     data() {
         return {
