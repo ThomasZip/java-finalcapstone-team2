@@ -3,12 +3,14 @@
         <form class="zipcode-form" v-on:submit.prevent="onSubmit">
             <div class="field">
                 <h1>Search for Restaurants</h1>
-                <label for="zipcodeInput">Enter a Zipcode: </label>
+                <div class="input-div">
+                <label for="zipcodeInput">Enter a Zipcode (required):<br>&nbsp;</label>
                 <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput" />
-
-                <label for="userCategory">Enter a Cuisine (Greek, Tacos, Noodles, etc): </label>
+                </div>
+                <div class="input-div">
+                <label for="userCategory">Enter a Cuisine (optional):<br> i.e. Greek, tacos, noodles, etc&nbsp;&nbsp;</label>
                 <input id="userCategoryId" name="userCategory" type="text" v-model="userCategory" v-bind:required="false" />
-                
+                </div>
             </div>
             <div id="button-div">
                 <button type="submit" value="Save" class="btn save">Go</button>
@@ -49,26 +51,40 @@ export default {
 
 <style>
 #search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding: 20px;
-    background-color: rgb(139, 228, 139);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 20px;
+  background-color: rgb(139, 228, 139);
 }
 
-h1,
-p {
-    text-align: center;
+h1, p {
+  text-align: center;
 }
 
 #button-div {
-    text-align: center;
+  text-align: center;
+  padding-top: 15px;
+}
+
+button {
+    height: 30px;
+    width: 90px;
 }
 
 .form-input-group {
     display: flex;
     justify-content: space-between;
-}</style>
+}
+
+.input-div {
+    padding: 5px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+</style>

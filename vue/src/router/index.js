@@ -8,6 +8,7 @@ import RegisterView from '../views/RegisterView.vue';
 import RestaurantSearchView from '../views/RestaurantSearchView.vue';
 import RestaurantCard from '../components/RestaurantCard.vue';
 import RestaurantDisplayView from '../views/RestaurantDisplayView.vue';
+import RestaurantDetailsView from '../views/RestaurantDetailsView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -61,6 +62,14 @@ const routes = [
     path: "/restaurantsSearch/:zipCode/:category", 
     name: "restaurant-display-zip-category", 
     component: RestaurantDisplayView, 
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/restaurantsSearch/id/",
+    name: "details",
+    component: RestaurantDetailsView,
     meta: {
       requiresAuth: true
     }
