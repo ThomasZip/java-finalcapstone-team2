@@ -6,7 +6,8 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       //the zipcode input from the user that should be stored and accessible globally
-      zipcodeInput: ''
+      zipcodeInput: '', 
+      storeOfRestaurants: {}
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -27,6 +28,9 @@ export function createStore(currentToken, currentUser) {
       },
       SET_ZIPCODE(state, zipcodeInput) {
         state.zipcodeInput = zipcodeInput;
+      }, 
+      SET_RESTAURANTS(state, businesses){
+        state.storeOfRestaurants = businesses;
       }
     },
   });

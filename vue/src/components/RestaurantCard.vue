@@ -32,10 +32,17 @@ export default {
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
+      if(category !== undefined){
+        category = category.toLowerCase();
+      }
+      
       RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
         .then((response) => {
           this.businesses = response.data;
+          this.$store.commit('SET_RESTAURANTS', this.businesses)
+
         })
+        
       //TODO: exception handling
     }
 
