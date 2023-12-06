@@ -5,11 +5,11 @@
                 <h1>Search for Restaurants</h1>
                 <div class="input-div">
                 <label for="zipcodeInput">Enter a Zipcode (required):<br>&nbsp;</label>
-                <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput" />
+                <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="zipcodeInput"  @keydown.space.prevent/>
                 </div>
                 <div class="input-div">
                 <label for="userCategory">Enter a Cuisine (optional):<br> i.e. Greek, tacos, noodles, etc&nbsp;&nbsp;</label>
-                <input id="userCategoryId" name="userCategory" type="text" v-model="userCategory" v-bind:required="false" />
+                <input id="userCategoryId" name="userCategory" type="text" v-model="userCategory" v-bind:required="false" @keydown.space.prevent/>
                 </div>
             </div>
             <div id="button-div">

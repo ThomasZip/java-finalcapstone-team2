@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <!-- Hold individual sections for each restaurant ex: div v-for -->
   <div v-for="restaurant in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-list">
     <div id="pic-div">
@@ -24,6 +25,16 @@
 <script>
 import RestaurantService from '../services/RestaurantService';
 export default {
+=======
+    <h1>Restaurant Card Yo</h1>
+    <p>{{ this.$store.state.selectedRestaurant.name }}</p>
+
+</template>
+
+<script>
+export default {
+<<<<<<<< HEAD:vue/src/components/RestaurantList.vue
+>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf
   data() {
     return {
       businesses: {
@@ -33,14 +44,22 @@ export default {
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
+<<<<<<< HEAD
       if (category !== undefined) {
         category = category.toLowerCase();  
       }
+=======
+      if(category !== undefined) {
+        category = category.toLowerCase();
+      }
+
+>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf
       RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
         .then((response) => {
           this.businesses = response.data;
         })
       //TODO: exception handling
+<<<<<<< HEAD
     },
     setSelectedRestaurant(restaurant) {
       this.$store.commit('ADD_SELECTED_RESTAURANT', restaurant);
@@ -85,3 +104,15 @@ export default {
   } 
  
   </style>
+=======
+    }
+========
+>>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf:vue/src/components/RestaurantCard.vue
+
+}
+</script>
+
+<style>
+
+</style>
+>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf
