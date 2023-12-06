@@ -1,14 +1,21 @@
 <template>
     <div id="main-div">
+        <nav>
+            <router-link v-bind:to="{name: 'restaurantsSearch'}">Back to Restaurant Search</router-link>
+        </nav>
     <h1>Restaurants List</h1>
-    <RestaurantCard/>
+    <RestaurantList/>
     </div>
 </template>
 <script>
+
+import RestaurantList from '../components/RestaurantList.vue';
 import RestaurantCard from '../components/RestaurantCard.vue';
+
 export default {
     components: {
-        RestaurantCard
+        RestaurantList,
+        //RestaurantCard
     },
     data() {
         return {

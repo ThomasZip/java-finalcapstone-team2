@@ -6,7 +6,7 @@ import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import RestaurantSearchView from '../views/RestaurantSearchView.vue';
-import RestaurantCard from '../components/RestaurantCard.vue';
+import RestaurantList from '../components/RestaurantList.vue';
 import RestaurantDisplayView from '../views/RestaurantDisplayView.vue';
 import RestaurantDetailsView from '../views/RestaurantDetailsView.vue';
 /**
@@ -67,7 +67,7 @@ const routes = [
     }
   },
   {
-    path: "/restaurantsSearch/id/",
+    path: "/restaurantsSearch/:id/",
     name: "details",
     component: RestaurantDetailsView,
     meta: {
