@@ -1,12 +1,13 @@
 <template>
+<<<<<<< HEAD
   <!-- Hold individual sections for each restaurant ex: div v-for -->
-  <div v-for="restaurant in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-card">
+  <div v-for="restaurant in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-list">
     <div id="pic-div">
       <img v-bind:src="restaurant.image_url" id="pic" />
     </div>
     <div id="text-div">
       <div id="name">
-        <router-link v-bind:to="{ name: 'details', params: { id: restaurant.id } }">
+        <router-link v-bind:to="{ name: 'details', params: { id: restaurant.id } }" v-on:click="setSelectedRestaurant">
           <h3>{{ restaurant.name }}</h3>
         </router-link>
       </div>
@@ -17,12 +18,23 @@
         <p>Price: {{ restaurant.price }}</p>
       </div>
     </div>
+    <img v-bind:src="`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/${restaurant.coordinates.longitude},${restaurant.coordinates.latitude},14/200x200?access_token=pk.eyJ1IjoiYmFvYW5qbmd1eWVuIiwiYSI6ImNscHNwdHU1czA1M2Uyd3JwNWZwd2I2N2sifQ.J1sb_URnd6sCtiH7ITM2Wg`" />
   </div>
 </template>
 
 <script>
 import RestaurantService from '../services/RestaurantService';
 export default {
+=======
+    <h1>Restaurant Card Yo</h1>
+    <p>{{ this.$store.state.selectedRestaurant.name }}</p>
+
+</template>
+
+<script>
+export default {
+<<<<<<<< HEAD:vue/src/components/RestaurantList.vue
+>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf
   data() {
     return {
       businesses: {
@@ -32,15 +44,28 @@ export default {
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
+<<<<<<< HEAD
+      if (category !== undefined) {
+        category = category.toLowerCase();  
+      }
+=======
       if(category !== undefined) {
         category = category.toLowerCase();
       }
 
+>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf
       RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
         .then((response) => {
           this.businesses = response.data;
         })
       //TODO: exception handling
+<<<<<<< HEAD
+    },
+    setSelectedRestaurant(restaurant) {
+      this.$store.commit('ADD_SELECTED_RESTAURANT', restaurant);
+    },
+    seeRestaurantCard() {
+
     }
 
   },
@@ -56,7 +81,7 @@ export default {
     max-height: 200px;
     max-width: 200px;
   }
-  #restaurant-card {
+  #restaurant-list {
     background-color: rgb(218, 235, 122);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -79,3 +104,15 @@ export default {
   } 
  
   </style>
+=======
+    }
+========
+>>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf:vue/src/components/RestaurantCard.vue
+
+}
+</script>
+
+<style>
+
+</style>
+>>>>>>> 288c1a77b9eba8804a658969dae1cd402c1620bf

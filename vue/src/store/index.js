@@ -6,7 +6,11 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       //the zipcode input from the user that should be stored and accessible globally
-      zipcodeInput: ''
+      zipcodeInput: '',
+      //a collection to hold the details of a single restaurant that the user requests to see details of
+      selectedRestaurant: {},
+      //an array to hold the restaurant objects selected by the outing creator
+      outingRestaurants: [],
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -27,6 +31,12 @@ export function createStore(currentToken, currentUser) {
       },
       SET_ZIPCODE(state, zipcodeInput) {
         state.zipcodeInput = zipcodeInput;
+      },
+      ADD_SELECTED_RESTAURANT(state, chosenRestaurant) {
+        state.selectedRestaurant = chosenRestaurant;
+      },
+      ADD_OUTING_RESTAURANT(state, restaurantForOuting) {
+        state.outingRestaurants.push(restaurantForOuting);
       }
     },
   });

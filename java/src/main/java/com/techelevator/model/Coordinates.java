@@ -25,5 +25,4 @@ public class Coordinates {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-
 }
