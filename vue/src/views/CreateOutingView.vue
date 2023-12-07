@@ -56,7 +56,6 @@ export default {
         //     let restaurantNames = this.outing.restaurants[0].map(item => item.name);
         //     return restaurantNames.join(', ');
         // }, 
-        
 
         iterateThroughOutingRestaurants() {
             let uniqueRestaurantsMap = new Map();
@@ -70,17 +69,9 @@ export default {
             this.iteratedRestaurants = Array.from(uniqueRestaurantsMap.values());
         },
 
-        // handleDuplicates(originalArray, newArray) {
-        //     const flattenedOriginalArray = originalArray.flat();
-        //     const uniqueItems = new Set([...flattenedOriginalArray, ...newArray]);
-        //     return Array.from(uniqueItems);
-        // }
-
-
     },
 
     mounted() {
-        //this.handleDuplicates();
         this.iterateThroughOutingRestaurants();
     }
 
