@@ -8,7 +8,6 @@ import RegisterView from '../views/RegisterView.vue';
 import RestaurantSearchView from '../views/RestaurantSearchView.vue';
 import RestaurantList from '../components/RestaurantList.vue';
 import RestaurantDisplayView from '../views/RestaurantDisplayView.vue';
-import RestaurantDetailsView from '../views/RestaurantDetailsView.vue';
 import CreateOutingView from '../views/CreateOutingView.vue';
 import MyOutingsView from '../views/MyOutingsView.vue';
 /**
@@ -64,14 +63,6 @@ const routes = [
     path: "/restaurantsSearch/:zipCode/:category", 
     name: "restaurant-display-zip-category", 
     component: RestaurantDisplayView, 
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: "/restaurantsSearch/:id",
-    name: "details",
-    component: RestaurantDetailsView,
     meta: {
       requiresAuth: true
     }
