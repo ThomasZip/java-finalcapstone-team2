@@ -7,6 +7,7 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
       //the zipcode input from the user that should be stored and accessible globally
       zipcodeInput: '', 
+      storeOfRestaurantsInOuting: [], 
       storeOfRestaurants: {}
     },
     mutations: {
@@ -31,7 +32,15 @@ export function createStore(currentToken, currentUser) {
       }, 
       SET_RESTAURANTS(state, businesses){
         state.storeOfRestaurants = businesses;
+      }, 
+
+      SET_OUTING_RESTAURANTS(state, restaurants) {
+        // Check if the restaurant already exists in the array before adding
+        
+          state.storeOfRestaurantsInOuting.unshift(restaurants);
+        
       }
+      
     },
   });
   return store;
