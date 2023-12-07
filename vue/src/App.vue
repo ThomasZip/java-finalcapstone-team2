@@ -7,3 +7,12 @@
     <router-view />
   </div>
 </template>
+
+<style>
+#nav {
+  background-color: pink;
+  /* height: 25px; */
+  padding: 5px;
+  font-weight: bold;
+}
+</style>
