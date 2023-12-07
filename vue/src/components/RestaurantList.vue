@@ -1,4 +1,8 @@
 <template>
+  <nav>
+            <router-link v-bind:to="{ name: 'create-outing' }" v-on:click="linkSelectedRestaurantsToStore" >Send Selected Restaurants to Your Outing
+            </router-link>
+        </nav>
   <!-- Hold individual sections for each restaurant ex: div v-for -->
   <div v-for="restaurant in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-card">
     <div id="pic-div">
@@ -6,15 +10,17 @@
     </div>
     <div id="text-div">
       <div id="name">
-        <router-link v-bind:to="{ name: 'details', params: { id: restaurant.id } }">
-          <h3>{{ restaurant.name }}</h3>
-        </router-link>
+        <h2>{{ restaurant.name }}</h2>
       </div>
       <div id="rating">
         <p>Rating: {{ restaurant.rating }}</p>
       </div>
       <div id="price">
         <p>Price: {{ restaurant.price }}</p>
+      </div>
+      <div>
+        <label>Add Restaurant to Outing?</label>
+        <input type="checkbox" v-model="selectedBusinesses" v-bind:value="restaurant"  />
       </div>
     </div>
   </div>
@@ -27,7 +33,8 @@ export default {
     return {
       businesses: {
         //restaurants: []
-      }
+      }, 
+      selectedBusinesses: []
     };
   },
   methods: {
@@ -39,9 +46,23 @@ export default {
       RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
         .then((response) => {
           this.businesses = response.data;
+          this.$store.commit('SET_RESTAURANTS', this.businesses)
+
         })
+        
       //TODO: exception handling
-    }
+    }, 
+
+    changeIsSelected(restaurant){
+      if(!this.selectedBusinesses.includes(restaurant)){
+        this.selectedBusinesses.push(restaurant)
+      }else if(this.selectedBusinesses.includes(restaurant)){
+        this.selectedBusinesses = this.selectedBusinesses.filter((item) => item !== restaurant)
+      }
+    }, 
+    linkSelectedRestaurantsToStore(){
+            this.$store.commit('SET_OUTING_RESTAURANTS', this.selectedBusinesses)
+        }
 
   },
   created() {
