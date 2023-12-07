@@ -43,7 +43,7 @@ export default {
                 dateEvent: '',
                 creator: '',
                 guests: [],
-                restaurants: this.$store.state.storeOfRestaurantsInOuting,
+                restaurants: this.$store.state.outingRestaurants,
                 id: ''
             },
             iteratedRestaurants: []
@@ -56,19 +56,31 @@ export default {
         //     let restaurantNames = this.outing.restaurants[0].map(item => item.name);
         //     return restaurantNames.join(', ');
         // }, 
-        // filterStoreOfRestaurantsInOutingForDuplicates() {
-        //     return this.$store.state.storeOfRestaurantsInOuting
-        // },
+        
 
         iterateThroughOutingRestaurants() {
-            this.iteratedRestaurants = this.outing.restaurants.flat();
+            let uniqueRestaurantsMap = new Map();
+
+            this.outing.restaurants.flat().forEach((restaurant)=>{
+                if(!uniqueRestaurantsMap.has(restaurant.id)){
+                    uniqueRestaurantsMap.set(restaurant.id, restaurant);
+                }
+            });
+
+            this.iteratedRestaurants = Array.from(uniqueRestaurantsMap.values());
         },
-        
+
+        // handleDuplicates(originalArray, newArray) {
+        //     const flattenedOriginalArray = originalArray.flat();
+        //     const uniqueItems = new Set([...flattenedOriginalArray, ...newArray]);
+        //     return Array.from(uniqueItems);
+        // }
 
 
     },
 
-    mounted(){
+    mounted() {
+        //this.handleDuplicates();
         this.iterateThroughOutingRestaurants();
     }
 

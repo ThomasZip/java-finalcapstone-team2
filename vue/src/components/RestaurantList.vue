@@ -12,9 +12,7 @@
     </div>
     <div id="text-div">
       <div id="name">
-        <router-link v-bind:to="{ name: 'details', params: { id: restaurant.id } }" v-on:click="setSelectedRestaurant">
-          <h3>{{ restaurant.name }}</h3>
-        </router-link>
+          <h3>{{ restaurant.name }}</h3>S
       </div>
       <div id="rating">
         <p>Rating: {{ restaurant.rating }}</p>
