@@ -75,11 +75,6 @@ button {
     width: 90px;
 }
 
-.form-input-group {
-    display: flex;
-    justify-content: space-between;
-}
-
 .input-div {
     padding: 5px;
   display: flex;
