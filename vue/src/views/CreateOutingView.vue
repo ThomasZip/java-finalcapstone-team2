@@ -26,8 +26,8 @@
         <div class="outing-restaurants" v-for="item in iteratedRestaurants" v-bind:key="item.id">
             {{ item.name }}
 
-        </div >
-        
+        </div>
+
         <div id="button-div">
             <button type="submit">Create Outing</button>
         </div>
@@ -85,28 +85,29 @@ export default {
 
 <style>
 #main-div-outing {
-  margin-top: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 10px;
-  background-color: rgb(139, 192, 228);
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+    background-color: rgb(139, 192, 228);
 }
 
-h1, p {
-  text-align: center;
+h1,
+p {
+    text-align: center;
 }
 
 #button-div {
-  text-align: center;
-  padding-top: 15px;
+    text-align: center;
+    padding-top: 15px;
 }
 
 .input-div {
     padding: 5px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px;
 }
 
 button {
@@ -116,7 +117,7 @@ button {
 }
 
 #nav-div-search {
-    background-color:  rgb(139, 228, 139);
+    background-color: rgb(139, 228, 139);
     padding: 1%;
     margin-top: 20px;
     margin-right: 20%;
@@ -125,11 +126,10 @@ button {
 }
 
 .outing-restaurants {
-    background-color:  rgb(218, 235, 122);
+    background-color: rgb(218, 235, 122);
     margin-left: 20%;
     margin-right: 20%;
     padding: 1%;
 
 }
-
 </style>

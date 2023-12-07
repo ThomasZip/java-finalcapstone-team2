@@ -31,19 +31,19 @@ export function createStore(currentToken, currentUser) {
       },
       SET_ZIPCODE(state, zipcodeInput) {
         state.zipcodeInput = zipcodeInput;
-      }, 
-      SET_RESTAURANTS(state, businesses){
+      },
+      SET_RESTAURANTS(state, businesses) {
         state.storeOfRestaurants = businesses;
-      }, 
+      },
 
       SET_OUTING_RESTAURANTS(state, restaurants) {
         // Check if the restaurant already exists in the array before adding
         state.outingRestaurants.unshift(restaurants);
-        
+
         // let uniqueRestaurants = handleDuplicates(state.outingRestaurants, [restaurants]);
         // state.outingRestaurants = uniqueRestaurants;
       }
-      
+
     },
   });
   return store;
