@@ -1,20 +1,20 @@
 <template>
   <nav>
-    <router-link v-bind:to="{ name: 'create-outing' }" v-on:click="linkSelectedRestaurantsToStore">Send Selected
+    <!-- adds restaurants to your outing and pushes user to create outing page -->
+    <router-link v-bind:to="{ name: 'create-outing', params: { userId: this.$store.state.user.id } }"
+      v-on:click="linkSelectedRestaurantsToStore">Send Selected
       Restaurants to Your Outing
     </router-link>
   </nav>
 
   <!-- Hold individual sections for each restaurant ex: div v-for -->
-  <div v-for="restaurant in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-list">
+  <div v-for="(restaurant, index) in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-list">
     <div id="pic-div">
       <img v-bind:src="restaurant.image_url" id="pic" />
     </div>
     <div id="text-div">
       <div id="name">
-        <router-link v-bind:to="{ name: 'details', params: { id: restaurant.id } }" v-on:click="setSelectedRestaurant">
-          <h3>{{ restaurant.name }}</h3>
-        </router-link>
+        <h3>{{ restaurant.name }}</h3>
       </div>
       <div id="rating">
         <p>Rating: {{ restaurant.rating }}</p>
@@ -22,6 +22,23 @@
       <div id="price">
         <p>Price: {{ restaurant.price }}</p>
       </div>
+      <div>
+        <p>Category: {{ restaurant.categories[0].title }}</p>
+      </div>
+      <div id="phoneNumber">
+        <p>Phone Number: {{ restaurant.display_phone }}</p>
+      </div>
+      <div id="options">
+        <p>Options: {{ formatTransactionTypes(restaurant.transactions) }}</p>
+      </div>
+      <div>
+        <p>Address: {{ restaurant.location.address1 }}, {{ restaurant.location.city }}, {{ restaurant.location.state }}
+        </p>
+      </div>
+      <div id="isClosed">
+        <p>Open Status: {{ openStatus[index] }}</p>
+      </div>
+
       <div>
         <label>Add Restaurant to Outing?</label>
         <input type="checkbox" v-model="selectedBusinesses" v-bind:value="restaurant" />
@@ -38,10 +55,23 @@ export default {
   data() {
     return {
       businesses: {
-        //restaurants: []
+
       },
       selectedBusinesses: []
     };
+  },
+  computed: {
+    openStatus() {
+      return this.businesses.businesses.map(restaurant => {
+        if (restaurant.isClosed) {
+          return 'Closed';
+        } else if (!restaurant.isClosed) {
+          return 'Open Now';
+        } else {
+          return 'No open status data available'
+        }
+      });
+    }
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
@@ -52,29 +82,31 @@ export default {
       RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
         .then((response) => {
           this.businesses = response.data;
-          this.$store.commit('SET_RESTAURANTS', this.businesses)
+          
 
         })
 
       //TODO: exception handling
     },
-
-    changeIsSelected(restaurant) {
-      if (!this.selectedBusinesses.includes(restaurant)) {
-        this.selectedBusinesses.push(restaurant)
-      } else if (this.selectedBusinesses.includes(restaurant)) {
-        this.selectedBusinesses = this.selectedBusinesses.filter((item) => item !== restaurant)
-      }
-    },
     linkSelectedRestaurantsToStore() {
       this.$store.commit('SET_OUTING_RESTAURANTS', this.selectedBusinesses)
-    }
-  },
-  setSelectedRestaurant(restaurant) {
-    this.$store.commit('ADD_SELECTED_RESTAURANT', restaurant);
-  },
-  seeRestaurantCard() {
-
+    },
+    formatTransactionTypes(transactions) {
+      if (transactions.length > 0) {
+        return transactions
+          .map(transaction => transaction
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+          )
+          .join(', ');
+      } else {
+        return 'Dine-In Only';
+      }
+    },
+    setSelectedRestaurant(restaurant) {
+      this.$store.commit('ADD_SELECTED_RESTAURANT', restaurant);
+    },
   },
   created() {
     this.getListOfBusinesses(this.$route.params.zipCode, this.$route.params.category)

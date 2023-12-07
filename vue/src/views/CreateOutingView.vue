@@ -6,7 +6,7 @@
     </div>
     <div class="input-div">
         <label for="zipcodeInput">Enter a Zipcode (required):</label>
-        <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipcode" />
+        <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipCode" />
     </div>
     <div class="input-div">
         <label for="deadlineInput">Date of final decision:</label>
@@ -17,7 +17,7 @@
         <label for="eventInput">Date of actual event:</label>
         <input id="eventInput" name="eventInput" type="datetime-local" v-model="outing.dateEvent" v-bind:required="true" />
     </div>
-    <div class="outing-restaurants" v-for="item in iteratedRestaurants" v-bind:key="item.id">
+    <div class="outing-restaurants" v-for="item in outing.outingRestaurants" v-bind:key="item.id">
         {{ item.name }}
 
     </div>
@@ -26,7 +26,7 @@
         </router-link>
     </nav>
     <nav>
-        <router-link v-bind:to="{ name: 'restaurantsSearch' }">Create Your Outing
+        <router-link v-bind:to="{ name: 'home' }" v-on:click="clearOutingRestaurantsFromStore">Finalize Your Outing
         </router-link>
     </nav>
 </template>
@@ -38,31 +38,28 @@ export default {
         return {
             outing: {
                 name: '',
-                zipcode: '',
+                zipCode: '',
                 dateDeadline: '',
                 dateEvent: '',
                 creator: '',
                 guests: [],
-                restaurants: this.$store.state.storeOfRestaurantsInOuting,
+                outingRestaurants: [],
                 id: ''
             },
-            iteratedRestaurants: []
+            localStorageOfStoreRestaurants: this.$store.state.storeOfRestaurantsInOuting
         }
     },
 
 
     methods: {
-        // getNamesOfRestaurants() {
-        //     let restaurantNames = this.outing.restaurants[0].map(item => item.name);
-        //     return restaurantNames.join(', ');
-        // }, 
-        // filterStoreOfRestaurantsInOutingForDuplicates() {
-        //     return this.$store.state.storeOfRestaurantsInOuting
-        // },
-
+        // takes the array of arrays from the storeOfRestaurantsInOuting variable in the store and removes it's nested property and concatenates the arrays into one array for display on this view. 
         iterateThroughOutingRestaurants() {
-            this.iteratedRestaurants = this.outing.restaurants.flat();
+            this.outing.outingRestaurants = this.localStorageOfStoreRestaurants.flat();
         },
+
+        clearOutingRestaurantsFromStore(){
+            this.$store.commit('CLEAR_OUTING_RESTAURANTS')
+        }
         
 
 

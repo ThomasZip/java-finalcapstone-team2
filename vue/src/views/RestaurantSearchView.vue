@@ -28,6 +28,7 @@ export default {
         };
     },
     methods: {
+        //if a category is used calls local api endpoint w/ {zip} & {category}, if no category used calls endpoint w/ {zip}
         onSubmit() {
             if(this.userCategory === ''){
                 this.goToRestaurantDisplayViewZip();
@@ -35,13 +36,9 @@ export default {
             }else{this.goToRestaurantDisplayViewZipAndCategory();}
             
         },
-        // addZipcode() {
-        //     this.$store.commit('SET_ZIPCODE', this.zipcodeInput);
-        // },
         goToRestaurantDisplayViewZipAndCategory() {
             this.$router.push({ name: 'restaurant-display-zip-category', params: { zipCode: this.zipcodeInput, category: this.userCategory }});
         }, 
-
         goToRestaurantDisplayViewZip(){
             this.$router.push({name: 'restaurant-display-zip', params:{zipCode: this.zipcodeInput}})
         }
