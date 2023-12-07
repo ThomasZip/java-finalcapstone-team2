@@ -56,13 +56,14 @@ export default {
         //     let restaurantNames = this.outing.restaurants[0].map(item => item.name);
         //     return restaurantNames.join(', ');
         // }, 
-        filterStoreOfRestaurantsInOutingForDuplicates() {
-            return this.$store.state.storeOfRestaurantsInOuting
-        },
+        // filterStoreOfRestaurantsInOutingForDuplicates() {
+        //     return this.$store.state.storeOfRestaurantsInOuting
+        // },
 
         iterateThroughOutingRestaurants() {
             this.iteratedRestaurants = this.outing.restaurants.flat();
-        }
+        },
+        
 
 
     },

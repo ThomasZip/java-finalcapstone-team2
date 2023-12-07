@@ -11,7 +11,6 @@ public class BusinessSearchDao {
     private String name;
     @JsonProperty("image_url")
     private String imgUrl;
-
     private List<Category> categories;
     private double rating;
     @JsonProperty("transactions")
@@ -20,7 +19,6 @@ public class BusinessSearchDao {
     private Location location;
     @JsonProperty("display_phone")
     private String displayPhone;
-
     private Coordinates coordinates;
 
     public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone, Coordinates coordinates) {
@@ -60,8 +58,6 @@ public class BusinessSearchDao {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-
-
 
     public double getRating() {
         return rating;
