@@ -8,7 +8,8 @@ import RegisterView from '../views/RegisterView.vue';
 import RestaurantSearchView from '../views/RestaurantSearchView.vue';
 import RestaurantList from '../components/RestaurantList.vue';
 import RestaurantDisplayView from '../views/RestaurantDisplayView.vue';
-import RestaurantDetailsView from '../views/RestaurantDetailsView.vue';
+import CreateOutingView from '../views/CreateOutingView.vue';
+import MyOutingsView from '../views/MyOutingsView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -65,14 +66,6 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  },
-  {
-    path: "/restaurantsSearch/:id",
-    name: "details",
-    component: RestaurantDetailsView,
-    meta: {
-      requiresAuth: true
-    }
   }, 
   {
     path: "/restaurantsSearch/:zipCode", 
@@ -82,6 +75,22 @@ const routes = [
       requiresAuth: true
     }
 
+  },
+  {
+    path: "/createOuting",
+    name: "create-outing",
+    component: CreateOutingView,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/myOutings",
+    name: "my-outings",
+    component: MyOutingsView,
+    meta:{
+      requiresAuth: true
+    }
   }
 ];
 // Create the router
