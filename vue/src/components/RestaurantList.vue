@@ -75,17 +75,23 @@ export default {
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
-      if (category !== undefined) {
+      if (category) {
         category = category.toLowerCase();
-      }
-
-      RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
+        RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
         .then((response) => {
           this.businesses = response.data;
           
 
         })
 
+      }else{
+        RestaurantService.getRestaurantsByZipOnly(zipCode)
+        .then((response) =>{
+          this.businesses = response.data;
+        })
+      }
+
+      
       //TODO: exception handling
     },
     linkSelectedRestaurantsToStore() {
