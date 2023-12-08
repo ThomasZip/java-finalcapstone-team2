@@ -49,7 +49,7 @@
         <input type="checkbox" v-model="selectedBusinesses" :value="restaurant" />
       </div>
     </div>
-    <img
+    <img id="map" 
       v-bind:src="`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/${restaurant.coordinates.longitude},${restaurant.coordinates.latitude},14/200x200?access_token=pk.eyJ1IjoiYmFvYW5qbmd1eWVuIiwiYSI6ImNscHNwdHU1czA1M2Uyd3JwNWZwd2I2N2sifQ.J1sb_URnd6sCtiH7ITM2Wg`" />
   </div>
 </template>
@@ -203,10 +203,25 @@ export default {
   background-color: rgb(218, 235, 122);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: "pic text-div";
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "hours pic"
+    "text-div map"
+  ;
   padding: 10px;
   margin: 2%;
   min-height: 220px;
+}
+
+#button-div {
+  grid-area: "hours";
+}
+
+#map {
+  grid-area: "map";
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #text-div {
