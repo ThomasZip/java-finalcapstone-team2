@@ -1,6 +1,6 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.RestaurantSearchDao;
+import com.techelevator.Services.RestaurantSearchService;
 import com.techelevator.model.YelpApiResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,20 +9,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/restaurants/")
 public class SearchController {
 
-    private final RestaurantSearchDao restaurantSearchDao;
+    private final RestaurantSearchService restaurantSearchService;
 
-    public SearchController(RestaurantSearchDao restaurantSearchDao){
-        this.restaurantSearchDao = restaurantSearchDao;
+    public SearchController(RestaurantSearchService restaurantSearchService){
+        this.restaurantSearchService = restaurantSearchService;
     }
 
     @RequestMapping(path = "search/{zipCode}/{category}", method = RequestMethod.GET)
     public YelpApiResponse getRestaurantsByZipPlusCategory(@PathVariable("zipCode") String zipCode, @PathVariable("category") String category){
-        return restaurantSearchDao.getRestaurantsByZipAndCategory(zipCode, category);
+        return restaurantSearchService.getRestaurantsByZipAndCategory(zipCode, category);
     }
 
     @RequestMapping(path = "search/{zipCode}", method = RequestMethod.GET)
     public YelpApiResponse getRestaurantsByZipPlusCategory(@PathVariable("zipCode") String zipCode){
-        return restaurantSearchDao.getRestaurantsByZipOnly(zipCode);
+        return restaurantSearchService.getRestaurantsByZipOnly(zipCode);
     }
-
 }

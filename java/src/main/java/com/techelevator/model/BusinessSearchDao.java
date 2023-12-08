@@ -2,11 +2,10 @@ package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class BusinessSearchDao {
-
-
     private String id;
     private String name;
     @JsonProperty("image_url")
@@ -20,8 +19,15 @@ public class BusinessSearchDao {
     @JsonProperty("display_phone")
     private String displayPhone;
     private Coordinates coordinates;
+    @JsonProperty("date_opened")
+    private String dateOpened;
 
-    public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone, Coordinates coordinates) {
+
+
+    @JsonProperty("is_closed")
+    private boolean isClosed;
+
+    public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone, Coordinates coordinates, boolean isClosed) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
@@ -32,8 +38,13 @@ public class BusinessSearchDao {
         this.location = address;
         this.displayPhone = displayPhone;
         this.coordinates = coordinates;
+        this.isClosed = isClosed;
     }
     public BusinessSearchDao(){}
+
+
+
+
 
     public String getId() {
         return id;
@@ -112,5 +123,13 @@ public class BusinessSearchDao {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.isClosed = closed;
     }
 }

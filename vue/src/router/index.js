@@ -77,7 +77,7 @@ const routes = [
 
   },
   {
-    path: "/createOuting",
+    path: "/createOuting/:userId",
     name: "create-outing",
     component: CreateOutingView,
     meta:{
