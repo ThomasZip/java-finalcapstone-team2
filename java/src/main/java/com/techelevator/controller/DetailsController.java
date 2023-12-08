@@ -1,12 +1,10 @@
 package com.techelevator.controller;
 
 import com.techelevator.model.BusinessDetails;
-import com.techelevator.services.BusinessDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.techelevator.Services.BusinessDetailsService;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/restaurants/")
 public class DetailsController {

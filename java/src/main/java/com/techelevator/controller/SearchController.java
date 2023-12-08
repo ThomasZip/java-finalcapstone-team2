@@ -1,6 +1,6 @@
 package com.techelevator.controller;
 
-import com.techelevator.services.RestaurantSearchService;
+import com.techelevator.Services.RestaurantSearchService;
 import com.techelevator.model.YelpApiResponse;
 import org.springframework.web.bind.annotation.*;
 

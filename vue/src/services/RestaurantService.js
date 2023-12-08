@@ -11,5 +11,23 @@ export default{
 
     getRestaurantsByZipOnly(zipCode){
         return baseUrl.get(`/api/restaurants/search/${zipCode}`)
+    },
+
+
+
+    getBusinessDetails(restaurantId) {
+        return baseUrl.get(`/api/businesses/get-details/${restaurantId}`)
+            .then(response => response.data)
+            .catch(error => {
+                console.error("Error fetching restaurant details:", error);
+                throw error;
+            });
     }
+
+
+
+
+
 }
+
+

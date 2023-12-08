@@ -1,19 +1,14 @@
 package com.techelevator.Services;
 
-import com.techelevator.dao.RestaurantSearchDao;
-import com.techelevator.model.BusinessSearchDao;
 import com.techelevator.model.YelpApiResponse;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
 @Component
-public class BusinessSearchService implements RestaurantSearchDao {
+public class BusinessSearchService implements RestaurantSearchService {
     private static final String YELP_API_BASE_URL = "https://api.yelp.com/v3/businesses/search?location=";
     private static final String YELP_API_CATEGORY_URL = "%20&categories=";
     private static final String YELP_SEARCH_LIMIT_URL = "&sort_by=best_match&limit=";

@@ -1,4 +1,4 @@
-package com.techelevator.services;
+package com.techelevator.Services;
 
 import com.techelevator.model.BusinessDetails;
 import org.springframework.http.RequestEntity;
@@ -13,7 +13,7 @@ public class BusinessDetailsService {
     private static final String YELP_API_BASE_URL = "https://api.yelp.com/v3/businesses/";
    private final RestTemplate restTemplate = new RestTemplate();
 
-    private static final String TOKEN = "IafMbuyJengOALTUJX8-T89A9lPKijBVAHDkxuBbbjf8_UeiHNfcmkeIC5luhcw2hPTfGqisk_1EwmaRa6umUS84Ud47KyYt23NLUiYh8OQdeuqtizxruzwILO5pZXYx";
+    private static final String TOKEN = "SsEIu6BdgTyTYdfwMxxNueZ0sQCAJO7BvV0DIM3G9Ol2sFMq5A7qfvWYgkJUW_ifnqalcZYZwXG7oNOfa2alQM4ULb-a-KIXO4zvaAuRIXYRSWcUHo91oJb5lRVqZXYx";
 
 
 
