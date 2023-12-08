@@ -4,9 +4,9 @@ import com.techelevator.model.BusinessDetails;
 import com.techelevator.Services.BusinessDetailsService;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/restaurants/")
+@CrossOrigin(origins = "*")
 public class DetailsController {
     private final BusinessDetailsService businessDetailsService;
 

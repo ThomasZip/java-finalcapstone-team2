@@ -24,13 +24,23 @@ public class BusinessSearchDao {
 
 
 
-    public String getDateOpened() {
-        return dateOpened;
-    }
+    @JsonProperty("is_closed")
+    private boolean isClosed;
 
-    public void setDateOpened(String dateOpened) {
-        this.dateOpened = dateOpened;
+    public BusinessSearchDao(String id, String name, String imgUrl,List <Category> categories, double rating, List<String> transactionTypes, String price, Location address, String displayPhone, Coordinates coordinates, boolean isClosed) {
+        this.id = id;
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.categories = categories;
+        this.rating = rating;
+        this.transactionTypes = transactionTypes;
+        this.price = price;
+        this.location = address;
+        this.displayPhone = displayPhone;
+        this.coordinates = coordinates;
+        this.isClosed = isClosed;
     }
+    public BusinessSearchDao(){}
 
 
 
@@ -113,5 +123,13 @@ public class BusinessSearchDao {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.isClosed = closed;
     }
 }

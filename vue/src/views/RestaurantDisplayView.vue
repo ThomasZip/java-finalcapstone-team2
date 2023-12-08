@@ -1,13 +1,10 @@
 <template>
     <div id="main-div">
         <nav>
-            <router-link v-bind:to="{ name: 'restaurantsSearch' }">Back to Restaurant Search
-            </router-link>
+            <router-link v-bind:to="{name: 'restaurantsSearch'}">Back to Restaurant Search</router-link>
         </nav>
-        
-
-        <h1>Restaurants List</h1>
-        <RestaurantList />
+    <h1>Restaurants List</h1>
+    <RestaurantList/>
     </div>
 </template>
 <script>
@@ -16,7 +13,7 @@ import RestaurantList from '../components/RestaurantList.vue';
 
 export default {
     components: {
-        RestaurantList,
+        RestaurantList
         //RestaurantCard
     },
     data() {
@@ -27,7 +24,7 @@ export default {
         }
     },
     methods: {
-        
+
 
     }
 }
