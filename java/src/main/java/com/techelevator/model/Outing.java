@@ -2,27 +2,27 @@ package com.techelevator.model;
 
 import java.util.List;
 
-public class OutingDto {
+public class Outing {
     private String name;
     private String zipCode;
     private String dateDeadline;
     private String dateEvent;
-    private String creator;
+    private int creatorId;
     private List<Guest> guests;
-    private List<BusinessSearchDao> outingRestaurants;
-    private String id;
+    private List<Restaurant> outingRestaurants;
+    private int id;
 
-    public OutingDto(String name, String zipCode, String dateDeadline, String dateEvent, String creator, List<Guest> guests, List<BusinessSearchDao> outingRestaurants, String id) {
+    public Outing(String name, String zipCode, String dateDeadline, String dateEvent, int creatorId, List<Guest> guests, List<Restaurant> outingRestaurants, int id) {
         this.name = name;
         this.zipCode = zipCode;
         this.dateDeadline = dateDeadline;
         this.dateEvent = dateEvent;
-        this.creator = creator;
+        this.creatorId = creatorId;
         this.guests = guests;
         this.outingRestaurants = outingRestaurants;
         this.id = id;
     }
-    public OutingDto(){}
+    public Outing(){}
 
     public String getName() {
         return name;
@@ -56,12 +56,12 @@ public class OutingDto {
         this.dateEvent = dateEvent;
     }
 
-    public String getCreator() {
-        return creator;
+    public int getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setCreatorId(int creatorId) {
+        this.creatorId = creatorId;
     }
 
     public List<Guest> getGuests() {
@@ -72,19 +72,19 @@ public class OutingDto {
         this.guests = guests;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public List<BusinessSearchDao> getOutingRestaurants() {
+    public List<Restaurant> getOutingRestaurants() {
         return outingRestaurants;
     }
 
-    public void setOutingRestaurants(List<BusinessSearchDao> outingRestaurants) {
+    public void setOutingRestaurants(List<Restaurant> outingRestaurants) {
         this.outingRestaurants = outingRestaurants;
     }
 
