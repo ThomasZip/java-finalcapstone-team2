@@ -9,17 +9,10 @@
     <div id="button-div">
       <button type="button" @click="getDetailsOfRestaurant(index)">Show Store Hours</button>
       <p v-if="restaurantDetails[index] && restaurantDetails[index].hours && restaurantDetails[index].hours[0]">
-
-
-
-
-
-
         <span v-for="(openHour, openIndex) in restaurantDetails[index].hours[0].open" :key="openIndex">
           {{ formatOpenHours(openHour) }}<br />
         </span>
-
-        
+        <p>Open Status: {{ getTrueOpenStatus(restaurantDetails[index].hours[0].is_open_now) }}</p>
       </p>
     </div>
     <div id="pic-div">
@@ -48,9 +41,9 @@
         <p>Address: {{ restaurant.location.address1 }}, {{ restaurant.location.city }},
           {{ restaurant.location.state }}</p>
       </div>
-      <div id="isClosed">
+      <!-- <div id="isClosed">
         <p>Open Status: {{ openStatus[index] }}</p>
-      </div>
+      </div> -->
       <div>
         <label>Add Restaurant to Outing?</label>
         <input type="checkbox" v-model="selectedBusinesses" :value="restaurant" />
@@ -128,11 +121,6 @@ export default {
         });
     },
     formatOpenHours(openHour) {
-
-    
-
-
-
       const formatTime = (time) => {
         const formattedTime = new Date();
         formattedTime.setHours(Math.floor(time / 100));
@@ -144,6 +132,13 @@ export default {
 
       return `Opening Hours: ${this.getDayName(openHour.day)} ${formattedStart} - ${formattedEnd}`;
 
+    },
+    getTrueOpenStatus(openStatus) {
+      if (openStatus == true) {
+        return 'Open Now';
+      } else {
+        return 'Closed';
+      }
     },
 
 
