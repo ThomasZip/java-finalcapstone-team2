@@ -16,5 +16,9 @@ export default{
         let url = `/api/restaurants/search/${zipCode}`;
         console.log(url);
         return baseUrl.get(`/api/restaurants/search/${zipCode}`)
+    }, 
+
+    getRestaurantDetails(restaurantId){
+        return baseUrl.get(`/api/restaurants/get-details/${restaurantId}`)
     }
 }

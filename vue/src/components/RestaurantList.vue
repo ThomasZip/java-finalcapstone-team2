@@ -9,6 +9,15 @@
 
   <!-- Hold individual sections for each restaurant ex: div v-for -->
   <div v-for="(restaurant, index) in businesses.businesses" v-bind:key="restaurant.id" id="restaurant-list">
+    <div id="button-div">
+      <button type="button" v-on:click="getDetailsOfRestaurant(restaurant.id)">Show Store Hours</button>
+      <p v-if="restaurantDetails && restaurantDetails.hours && restaurantDetails.hours[0]">
+        <!-- Loop through each open object inside hours[0].open -->
+        <span v-for="(openHour, openIndex) in restaurantDetails.hours[0].open" :key="openIndex">
+          {{ formatOpenHours(openHour) }}<br />
+        </span>
+      </p>
+    </div>
     <div id="pic-div">
       <img v-bind:src="restaurant.image_url" id="pic" />
     </div>
@@ -54,10 +63,10 @@ import RestaurantService from '../services/RestaurantService';
 export default {
   data() {
     return {
-      businesses: {
+      businesses: {},
+      selectedBusinesses: [],
+      restaurantDetails: {},
 
-      },
-      selectedBusinesses: []
     };
   },
   computed: {
@@ -71,27 +80,28 @@ export default {
           return 'No open status data available'
         }
       });
-    }
+    },
+
   },
   methods: {
     getListOfBusinesses(zipCode, category) {
       if (category) {
         category = category.toLowerCase();
         RestaurantService.getRestaurantsByZipAndCategory(zipCode, category)
-        .then((response) => {
-          this.businesses = response.data;
-          
+          .then((response) => {
+            this.businesses = response.data;
 
-        })
 
-      }else{
+          })
+
+      } else {
         RestaurantService.getRestaurantsByZipOnly(zipCode)
-        .then((response) =>{
-          this.businesses = response.data;
-        })
+          .then((response) => {
+            this.businesses = response.data;
+          })
       }
 
-      
+
       //TODO: exception handling
     },
     linkSelectedRestaurantsToStore() {
@@ -113,6 +123,30 @@ export default {
     setSelectedRestaurant(restaurant) {
       this.$store.commit('ADD_SELECTED_RESTAURANT', restaurant);
     },
+
+    getDetailsOfRestaurant(id) {
+      RestaurantService.getRestaurantDetails(id)
+        .then((response) => {
+          this.restaurantDetails = response.data;
+        })
+    },
+
+    formatOpenHours(openHour) {
+      const formatTime = (time) => {
+        const formattedTime = new Date();
+        formattedTime.setHours(Math.floor(time / 100));
+        formattedTime.setMinutes(time % 100);
+
+        return formattedTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      };
+
+      const formattedStart = formatTime(openHour.start);
+      const formattedEnd = formatTime(openHour.end);
+
+      return `Opening Hours: ${formattedStart} - ${formattedEnd}`;
+    },
+
+
   },
   created() {
     this.getListOfBusinesses(this.$route.params.zipCode, this.$route.params.category)
