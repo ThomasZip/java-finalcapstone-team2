@@ -9,9 +9,17 @@
     <div id="button-div">
       <button type="button" @click="getDetailsOfRestaurant(index)">Show Store Hours</button>
       <p v-if="restaurantDetails[index] && restaurantDetails[index].hours && restaurantDetails[index].hours[0]">
+
+
+
+
+
+
         <span v-for="(openHour, openIndex) in restaurantDetails[index].hours[0].open" :key="openIndex">
           {{ formatOpenHours(openHour) }}<br />
         </span>
+
+        
       </p>
     </div>
     <div id="pic-div">
@@ -118,18 +126,57 @@ export default {
         });
     },
     formatOpenHours(openHour) {
+
+    
+
+
+
       const formatTime = (time) => {
         const formattedTime = new Date();
         formattedTime.setHours(Math.floor(time / 100));
         formattedTime.setMinutes(time % 100);
         return formattedTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
       };
-
       const formattedStart = formatTime(openHour.start);
       const formattedEnd = formatTime(openHour.end);
 
-      return `Opening Hours: ${formattedStart} - ${formattedEnd}`;
+      return `Opening Hours: ${this.getDayName(openHour.day)} ${formattedStart} - ${formattedEnd}`;
+
     },
+
+
+
+
+//     formatOpenHours(openHour) {
+//   const currentDay = new Date().getDay(); // 0 for Sunday, 1 for Monday, and so on
+//   const todayOpenHour = openHour.find(day => day.day === currentDay);
+
+//   if (todayOpenHour) {
+//     const formatTime = (time) => {
+//       const formattedTime = new Date();
+//       formattedTime.setHours(Math.floor(time / 100));
+//       formattedTime.setMinutes(time % 100);
+//       return formattedTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+//     };
+
+//     const formattedStart = formatTime(todayOpenHour.start);
+//     const formattedEnd = formatTime(todayOpenHour.end);
+
+//     return `Opening Hours: ${formattedStart} - ${formattedEnd}`;
+//   } else {
+//     return 'Closed today';
+//   }
+// },
+
+
+
+
+
+
+
+
+
+
     getDayName(day) {
       const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       return daysOfWeek[day];
