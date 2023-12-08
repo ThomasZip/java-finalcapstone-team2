@@ -7,10 +7,9 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
       //the zipcode input from the user that should be stored and accessible globally
       zipcodeInput: '',
-      //a collection to hold the details of a single restaurant that the user requests to see details of
-      selectedRestaurant: {},
-      //an array to hold the restaurant objects selected by the outing creator
-      outingRestaurants: [],
+      //holds restaurants to be added to a users outing, links the restaurants checked to what is displayed in the outing. 
+      storeOfRestaurantsInOuting: [],
+
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -28,16 +27,20 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
+        state.storeOfRestaurantsInOuting = [];
       },
       SET_ZIPCODE(state, zipcodeInput) {
         state.zipcodeInput = zipcodeInput;
       },
-      ADD_SELECTED_RESTAURANT(state, chosenRestaurant) {
-        state.selectedRestaurant = chosenRestaurant;
+      SET_OUTING_RESTAURANTS(state, restaurants) {
+        state.storeOfRestaurantsInOuting.unshift(restaurants);
+
       },
-      ADD_OUTING_RESTAURANT(state, restaurantForOuting) {
-        state.outingRestaurants.push(restaurantForOuting);
+
+      CLEAR_OUTING_RESTAURANTS(state) {
+        state.storeOfRestaurantsInOuting = [];
       }
+
     },
   });
   return store;

@@ -13,7 +13,7 @@ import RestaurantList from '../components/RestaurantList.vue';
 
 export default {
     components: {
-        RestaurantList,
+        RestaurantList
         //RestaurantCard
     },
     data() {
@@ -24,17 +24,18 @@ export default {
         }
     },
     methods: {
-       
+
+
     }
 }
 </script>
 <style>
 #main-div {
-  background-color: rgb(139, 228, 139);
-  margin-top: 10%;
-  margin-left: 5%;
-  margin-right: 5%;
-  padding: 20px;
+    background-color: rgb(139, 228, 139);
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 20px;
 }
 </style>
 
