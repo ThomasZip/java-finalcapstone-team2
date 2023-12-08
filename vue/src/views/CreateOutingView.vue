@@ -6,7 +6,7 @@
             <input id="nameInput" name="nameInput" type="text" v-model="outing.name" v-bind:required="true" />
         </div>
         <div class="input-div">
-            <label for="zipcodeInput">Enter a Zipcode (required):&nbsp;</label>
+            <label for="zipcodeInput">Enter a Zipcode:&nbsp;</label>
             <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipcode" />
         </div>
         <div class="input-div">
@@ -19,14 +19,35 @@
             <input id="eventInput" name="eventInput" type="datetime-local" v-model="outing.dateEvent"
                 v-bind:required="true" />
         </div>
-        <nav id="nav-div-search">
+        <nav class="nav-div-search">
             <router-link v-bind:to="{ name: 'restaurantsSearch' }">Search Restaurant to Add to Your Outing
             </router-link>
         </nav>
-        <div class="outing-restaurants" v-for="item in iteratedRestaurants" v-bind:key="item.id">
+        <div class="outing-list" v-for="item in iteratedRestaurants" v-bind:key="item.id">
             {{ item.name }}
 
         </div>
+        <div id="add-guests" class="nav-div-search">
+            <button id="add-guest-btn" v-on:click="toggleIsFormShown">Add Guests</button>
+        </div>
+        <div class="outing-list" v-for="item in guests" v-bind:key="item.id">
+            {{ item.name }} ({{ item.email }})
+
+        </div>
+        <form v-show="isFormShown" @submit.prevent>
+            <div class="input-div">
+                <label for="guestName">Guest's Name:</label>
+                <input id="guestName" type="text" v-model="guest.name"/>
+            </div>
+            <div class="input-div">
+                <label for="guestEmail">Guest's Email:</label>
+                <input id="guestEmail" type="text" v-model="guest.email"/>
+            </div>
+            <div id="button-div">
+                <button type="submit" v-on:click="addGuest">Save</button>
+                <!-- click to submit, adds guest's name -->
+            </div>
+        </form>
 
         <!-- <div id="button-div">
             <button type="submit">Create Outing</button>
@@ -52,14 +73,21 @@ export default {
                 zipCode: '',
                 dateDeadline: '',
                 dateEvent: '',
-                creator: this.$store.state.user.id ,
+                creator: this.$store.state.user.id,
                 guests: [],
                 restaurants: this.$store.state.storeOfRestaurantsInOuting,
                 id: ''
             },
             localStorageOfStoreRestaurants: this.$store.state.storeOfRestaurantsInOuting,
 
-            iteratedRestaurants: []
+            iteratedRestaurants: [],
+
+            isFormShown: false,
+
+            guest: {
+                name: '',
+                email: ''
+            }
         }
     },
 
@@ -70,12 +98,12 @@ export default {
         //     return restaurantNames.join(', ');
         // }, 
 
-    
+
         // iterateThroughOutingRestaurants() {
         //     this.outing.outingRestaurants = this.localStorageOfStoreRestaurants.flat();
         // },
 
-        clearOutingRestaurantsFromStore(){
+        clearOutingRestaurantsFromStore() {
             this.$store.commit('CLEAR_OUTING_RESTAURANTS')
         },
 
@@ -91,10 +119,46 @@ export default {
             this.iteratedRestaurants = Array.from(uniqueRestaurantsMap.values());
         },
 
+        toggleIsFormShown() {
+            this.isFormShown = !this.isFormShown;
+        },
+
+        resetForm() {
+            this.guest = {};
+            this.toggleIsFormShown();
+        },
+
+        clearOutingGuestsFromStore() {
+            this.$store.commit('CLEAR_GUESTS_RESTAURANTS')
+        },
+
+        iterateThroughGuests() {
+            let uniqueGuestsMap = new Map();
+
+            this.outing.guests.flat().forEach((guest) => {
+                if (!uniqueGuestsMap.has(guest.email)) {
+                    uniqueGuestsMap.set(guest.email, guest);
+                }
+            });
+
+            this.guests = Array.from(uniqueGuestsMap.values());
+        },
+
+        linkNewGuestToStore() {
+            this.$store.commit('SET_OUTING_GUESTS', this.guests)
+        },
+
+        addGuest() {
+            this.outing.guests.push(this.guest);
+            this.resetForm();
+            this.iterateThroughGuests();
+        }
+
     },
 
     mounted() {
         this.iterateThroughOutingRestaurants();
+        this.iterateThroughGuests();
     }
 
 
@@ -135,7 +199,7 @@ button {
     height: 50px;
 }
 
-#nav-div-search {
+.nav-div-search {
     background-color: rgb(139, 228, 139);
     padding: 1%;
     margin-top: 20px;
@@ -144,7 +208,7 @@ button {
     text-align: center;
 }
 
-.outing-restaurants {
+.outing-list {
     background-color: rgb(218, 235, 122);
     margin-left: 20%;
     margin-right: 20%;

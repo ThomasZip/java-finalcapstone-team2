@@ -9,7 +9,7 @@ export function createStore(currentToken, currentUser) {
       zipcodeInput: '',
       //holds restaurants to be added to a users outing, links the restaurants checked to what is displayed in the outing. 
       storeOfRestaurantsInOuting: [],
-
+      storeOfGuestsInOuting: []
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -36,9 +36,14 @@ export function createStore(currentToken, currentUser) {
         state.storeOfRestaurantsInOuting.unshift(restaurants);
 
       },
-
       CLEAR_OUTING_RESTAURANTS(state) {
         state.storeOfRestaurantsInOuting = [];
+      },
+      SET_GUESTS_RESTAURANTS(state, guests) {
+        state.storeOfGuestsInOuting.unshift(guests);
+      },
+      CLEAR_GUESTS_RESTAURANTS(state) {
+        state.storeOfGuestsInOuting = [];
       }
 
     },
