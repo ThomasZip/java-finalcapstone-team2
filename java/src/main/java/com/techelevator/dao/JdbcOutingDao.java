@@ -1,8 +1,12 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.BusinessSearchDao;
+import com.techelevator.model.Guest;
 import com.techelevator.model.Outing;
+import com.techelevator.model.Restaurant;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,16 +31,39 @@ public class JdbcOutingDao implements OutingDao {
     }
     @Override
     public Outing getOutingByOutingId(int outingId){
-        Outing outing = null;
-        String sql = "";
-        return null;
+        Outing returnedOuting = new Outing();
+        String outingSql = "SELECT outing_id, outing_name, deadline, event_date, creator, zipcode " +
+                    "FROM outings " +
+                    "WHERE outing_id = ?;";
+
+
+        try{
+            SqlRowSet outingResults = jdbcTemplate.queryForRowSet(outingSql, outingId);
+            if (outingResults.next()){
+                returnedOuting = mapRowToOuting(outingResults);
+            }
+
+            String restaurantSql = "SELECT restaurant_name, thumbs_up, thumbs_down, outing_id FROM restaurants WHERE outing_id = ?";
+            SqlRowSet restaurantResults = jdbcTemplate.queryForRowSet(restaurantSql, outingId);
+            List<Restaurant> restaurants = mapRowToRestaurants(restaurantResults);
+            returnedOuting.setOutingRestaurants(restaurants);
+
+            String guestSql = "SELECT guest_name, email_address FROM guests WHERE outing_id = ?";
+            SqlRowSet guestResults = jdbcTemplate.queryForRowSet(guestSql, outingId);
+            List<Guest> guests = mapRowToGuests(guestResults);
+            returnedOuting.setGuests(guests);
+
+        }catch(Exception e){
+            throw new DaoException("error",e);
+        }
+        return returnedOuting;
     }
 
     //Is this where 0 is set?
     @Override
     public void createOuting(Outing outing){
-        String sqlOutings = "INSERT INTO outings (outing_name, deadline, event_date, creator) " +
-                     "VALUES (?, ?, ?, ?) " +
+        String sqlOutings = "INSERT INTO outings (outing_name, deadline, event_date, creator, zipcode) " +
+                     "VALUES (?, ?, ?, ?, ?) " +
                      "RETURNING outing_id;";
 
 //        String sqlRestaurants = "INSERT INTO restaurants (restaurant_name, thumbs_up, thumbs_down, outing_id) " +
@@ -49,7 +76,7 @@ public class JdbcOutingDao implements OutingDao {
 
 
         try{
-            int outingId =jdbcTemplate.queryForObject(sqlOutings, int.class, outing.getName(), outing.getDateDeadline(), outing.getDateEvent(), outing.getCreatorId());
+            int outingId =jdbcTemplate.queryForObject(sqlOutings, int.class, outing.getName(), outing.getDateDeadline(), outing.getDateEvent(), outing.getCreatorId(), outing.getZipCode());
 
 //            List<Integer> restaurantIds = new ArrayList<Integer>();
 //
@@ -71,6 +98,46 @@ public class JdbcOutingDao implements OutingDao {
 
 
     }
+
+    private List<Guest> mapRowToGuests(SqlRowSet rs){
+        List<Guest> guests = new ArrayList<>();
+
+        while(rs.next()){
+            Guest guest = new Guest();
+            guest.setName(rs.getString("guest_name"));
+            guest.setEmailAddress(rs.getString("email_address"));
+            guests.add(guest);
+        }
+        return guests;
+    }
+
+    private List<Restaurant> mapRowToRestaurants(SqlRowSet rs){
+        List<Restaurant> restaurants = new ArrayList<>();
+
+        while(rs.next()){
+            Restaurant restaurant = new Restaurant();
+            restaurant.setRestaurantName(rs.getString("restaurant_name"));
+            restaurant.setThumbsDown(rs.getInt("thumbs_down"));
+            restaurant.setThumbsUp(rs.getInt("thumbs_up"));
+            restaurants.add(restaurant);
+        }
+        return restaurants;
+    }
+
+    private Outing mapRowToOuting(SqlRowSet rs){
+        Outing outing = new Outing();
+        outing.setOutingId(rs.getInt("outing_id"));
+        outing.setName(rs.getString("outing_name"));
+        outing.setDateDeadline(rs.getString("deadline"));
+        outing.setDateEvent(rs.getString("event_date"));
+        outing.setCreatorId(rs.getInt("creator"));
+        outing.setZipCode(rs.getString("zipcode"));
+
+        return outing;
+    }
+
+
+
 
 
 

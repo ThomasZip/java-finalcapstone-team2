@@ -3,6 +3,7 @@ package com.techelevator.model;
 import java.util.List;
 
 public class Outing {
+    private int outingId;
     private String name;
     private String zipCode;
     private String dateDeadline;
@@ -10,9 +11,10 @@ public class Outing {
     private int creatorId;
     private List<Guest> guests;
     private List<Restaurant> outingRestaurants;
-    private int id;
 
-    public Outing(String name, String zipCode, String dateDeadline, String dateEvent, int creatorId, List<Guest> guests, List<Restaurant> outingRestaurants, int id) {
+
+    public Outing(int outingId, String name, String zipCode, String dateDeadline, String dateEvent, int creatorId, List<Guest> guests, List<Restaurant> outingRestaurants) {
+        this.outingId = outingId;
         this.name = name;
         this.zipCode = zipCode;
         this.dateDeadline = dateDeadline;
@@ -20,7 +22,7 @@ public class Outing {
         this.creatorId = creatorId;
         this.guests = guests;
         this.outingRestaurants = outingRestaurants;
-        this.id = id;
+
     }
     public Outing(){}
 
@@ -72,13 +74,6 @@ public class Outing {
         this.guests = guests;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public List<Restaurant> getOutingRestaurants() {
         return outingRestaurants;
@@ -86,6 +81,14 @@ public class Outing {
 
     public void setOutingRestaurants(List<Restaurant> outingRestaurants) {
         this.outingRestaurants = outingRestaurants;
+    }
+
+    public int getOutingId() {
+        return outingId;
+    }
+
+    public void setOutingId(int outingId) {
+        this.outingId = outingId;
     }
 
 }

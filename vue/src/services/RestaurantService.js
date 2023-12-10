@@ -20,6 +20,10 @@ export default{
 
     getRestaurantDetails(restaurantId){
         return baseUrl.get(`/api/restaurants/get-details/${restaurantId}`)
+    }, 
+
+    getOutingByOutingId(outingId){
+        return baseUrl.get(`/api/outings/${outingId}`)
     }
 
 

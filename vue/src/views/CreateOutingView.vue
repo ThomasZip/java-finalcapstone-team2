@@ -7,7 +7,7 @@
         </div>
         <div class="input-div">
             <label for="zipcodeInput">Enter a Zipcode:&nbsp;</label>
-            <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipcode" />
+            <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipCode" />
         </div>
         <div class="input-div">
             <label for="deadlineInput">Date of final decision:&nbsp;</label>
