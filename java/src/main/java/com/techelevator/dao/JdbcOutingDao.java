@@ -85,31 +85,35 @@ public class JdbcOutingDao implements OutingDao {
                      "VALUES (?, ?, ?, ?, ?) " +
                      "RETURNING outing_id;";
 
-//        String sqlRestaurants = "INSERT INTO restaurants (restaurant_name, thumbs_up, thumbs_down, outing_id) " +
-//                "VALUES (?, 0, 0, ?) " +
-//                "RETURNING restaurant_id;";
-//
-//        String sqlGuests = "INSERT INTO guests (guest_name, email_address, outing_id) " +
-//                "VALUES (?, ?, ?) " +
-//                "RETURNING guest_id;";
-
 
         try{
             int outingId =jdbcTemplate.queryForObject(sqlOutings, int.class, outing.getName(), outing.getDateDeadline(), outing.getDateEvent(), outing.getCreatorId(), outing.getZipCode());
 
-//            List<Integer> restaurantIds = new ArrayList<Integer>();
-//
-//            for (int i = 0; i < outing.getOutingRestaurants().size(); i++ ) {
-//                int restaurantId = jdbcTemplate.queryForObject(sqlRestaurants, int.class, outing.getOutingRestaurants().get(i).getRestaurantName(), outingId );
-//                restaurantIds.add(restaurantId);
-//            }
-//
-//            List<Integer> guestIds = new ArrayList<Integer>();
-//
-//            for (int i = 0; i < outing.getGuests().size(); i++ ) {
-//                int guestId = jdbcTemplate.queryForObject(sqlGuests, int.class, outing.getGuests().get(i).getName(), outing.getGuests().get(i).getEmailAddress(), outingId );
-//                guestIds.add(guestId);
-//            }
+            List<Integer> restaurants = new ArrayList<>();
+
+            for (int i = 0; i < outing.getOutingRestaurants().size(); i++ ) {
+                String restaurantName = outing.getOutingRestaurants().get(i).getRestaurantName();
+
+                String sqlRestaurant = "INSERT INTO restaurants (restaurant_name, thumbs_up, thumbs_down, outing_id) " +
+                        "VALUES (?, 0, 0, ?) " +
+                        "RETURNING restaurant_id;";
+                Integer restaurantId = jdbcTemplate.queryForObject(sqlRestaurant, Integer.class, restaurantName, outingId );
+                restaurants.add(restaurantId);
+            }
+
+            List<Integer> guests = new ArrayList<>();
+
+            for (int i = 0; i < outing.getGuests().size(); i++ ) {
+                String guestName = outing.getGuests().get(i).getName();
+                String guestEmail = outing.getGuests().get(i).getEmailAddress();
+
+                String sqlGuests = "INSERT INTO guests (guest_name, email_address, outing_id) " +
+                        "VALUES (?, ?, ?) " +
+                        "RETURNING guest_id;";
+
+                Integer guestId = jdbcTemplate.queryForObject(sqlGuests, Integer.class, guestName, guestEmail, outingId );
+                guests.add(guestId);
+            }
 
         }catch (Exception e){
             throw e;

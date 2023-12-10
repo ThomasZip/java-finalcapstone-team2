@@ -1,10 +1,12 @@
 package com.techelevator.model;
 
 public class Guest {
+    private int guestId;
     private String name;
     private String emailAddress;
 
-    public Guest (String name, String emailAddress) {
+    public Guest (int id, String name, String emailAddress) {
+        this.guestId = id;
         this.name = name;
         this.emailAddress = emailAddress;
     }
@@ -25,5 +27,13 @@ public class Guest {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public int getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
     }
 }

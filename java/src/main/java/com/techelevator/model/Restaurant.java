@@ -2,14 +2,15 @@ package com.techelevator.model;
 
 public class Restaurant {
 
-
+    private int restaurantId;
     private String restaurantName;
     private int thumbsUp;
     private int thumbsDown;
 
     public Restaurant(){}
 
-    public Restaurant(String name, int up, int down){
+    public Restaurant(int id, String name, int up, int down){
+        this.restaurantId = id;
         this.restaurantName = name;
         this.thumbsUp = up;
         this.thumbsDown = down;
