@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -28,6 +29,11 @@ public class OutingController {
   @RequestMapping(path = "/{outingId}", method = RequestMethod.GET)
   public Outing getOutingByOutingId(@PathVariable ("outingId") int outingId){
       return outingDao.getOutingByOutingId(outingId);
+  }
+
+  @RequestMapping(path = "/creator/{creatorId}", method = RequestMethod.GET)
+  public List<Outing> getOutingByCreatorId(@PathVariable("creatorId") int creatorId){
+      return outingDao.getOutingsByCreatorId(creatorId);
   }
 
 

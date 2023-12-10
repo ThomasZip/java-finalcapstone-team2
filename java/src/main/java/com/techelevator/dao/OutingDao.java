@@ -10,4 +10,5 @@ public interface OutingDao {
 //    public List<Outing> getOutingsByUserId(int UserId);
     public Outing getOutingByOutingId(int outingId);
 //    public Outing updateOutingWithVotes(Outing outingToUpdate);
+    public List<Outing> getOutingsByCreatorId(int creatorId);
 }

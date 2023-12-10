@@ -58,6 +58,25 @@ public class JdbcOutingDao implements OutingDao {
         }
         return returnedOuting;
     }
+    @Override
+    public List<Outing> getOutingsByCreatorId(int creatorId){
+        List<Outing> returnedOutings = new ArrayList<>();
+
+        String sql = "SELECT outing_id, outing_name, deadline, event_date, creator, zipcode FROM outings WHERE creator = ?";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, creatorId);
+            while (results.next()) {
+                Outing outing = mapRowToOuting(results);
+                returnedOutings.add(outing);
+            }
+        }catch (Exception e){
+            throw e;
+        }
+
+        return returnedOutings;
+
+    }
 
     //Is this where 0 is set?
     @Override
