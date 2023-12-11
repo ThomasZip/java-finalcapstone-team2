@@ -23,7 +23,7 @@
             <router-link v-bind:to="{ name: 'restaurantsSearch' }">Search Restaurant to Add to Your Outing
             </router-link>
         </nav>
-        <div class="outing-list" v-for="item in outing.restaurants" v-bind:key="item.id">
+        <div class="outing-list" v-for="item in outing.outingRestaurants" v-bind:key="item.id">
             {{ item.name }}
 
         </div>
@@ -76,8 +76,17 @@ export default {
                 dateEvent: '',
                 creator: this.$store.state.user.id,
                 guests: [],
-                restaurants: [],
+                outingRestaurants: [],
                 
+            },
+            outingToPost: {
+                name: '',
+                zipCode: '',
+                dateDeadline: '',
+                dateEvent: '',
+                creatorId: '',
+                guests: [],
+                outingRestaurants: []
             },
             localStorageOfStoreRestaurants: this.$store.state.storeOfRestaurantsInOuting,
 
@@ -105,7 +114,8 @@ export default {
         // },
 
         clearOutingRestaurantsFromStoreAndAddOutingToSql() {
-            this.addOutingToSql(this.outing, this.currentToken);
+            this.filterOuting();
+            this.addOutingToSql(this.outingToPost);
             this.$store.commit('CLEAR_OUTING_RESTAURANTS');
             
         },
@@ -119,7 +129,7 @@ export default {
                 }
             });
 
-            this.outing.restaurants = Array.from(uniqueRestaurantsMap.values());
+            this.outing.outingRestaurants = Array.from(uniqueRestaurantsMap.values());
         },
 
         toggleIsFormShown() {
@@ -155,13 +165,37 @@ export default {
             this.outing.guests.push(this.guest);
             this.resetForm();
             this.iterateThroughGuests();
+            
         }, 
 
-        addOutingToSql(outing, currentToken){
-            RestaurantService.addOuting(outing, currentToken)
+        addOutingToSql(outing){
+            //does this need a .then()? 
+            RestaurantService.addOuting(outing)
+        },
+
+        filterOuting(){
+            this.outingToPost.name = this.outing.name;
+            this.outingToPost.creatorId= this.outing.creator;
+            this.outingToPost.zipCode = this.outing.zipCode;
+            this.outingToPost.dateDeadline = this.outing.dateDeadline;
+            this.outingToPost.dateEvent = this.outing.dateEvent;
+            for(let i = 0; i < this.outing.guests.length; i++){
+                this.outingToPost.guests.push( {
+                    emailAddress: this.outing.guests[i].email,
+                    name: this.outing.guests[i].name
+                });
+            }
+            for(let i = 0; i < this.outing.outingRestaurants.length; i++){
+                this.outingToPost.outingRestaurants.push( {
+                    longRestaurantId: this.outing.outingRestaurants[i].id,
+                    restaurantName: this.outing.outingRestaurants[i].name
+                });
+            }
+            return this.outingToPost;
         }
 
     },
+
 
     mounted() {
         this.iterateThroughOutingRestaurants();

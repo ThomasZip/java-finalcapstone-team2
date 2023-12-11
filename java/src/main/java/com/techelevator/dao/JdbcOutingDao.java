@@ -95,13 +95,14 @@ public class JdbcOutingDao implements OutingDao {
             List<Integer> restaurants = new ArrayList<>();
 
             for (int i = 0; i < outing.getOutingRestaurants().size(); i++ ) {
-                String restaurantName = outing.getOutingRestaurants().get(i).getRestaurantName();
+                String name = outing.getOutingRestaurants().get(i).getRestaurantName();
+                System.out.println(name);
                 String restaurantLongId = outing.getOutingRestaurants().get(i).getLongRestaurantId();
 
                 String sqlRestaurant = "INSERT INTO restaurants (restaurant_name, thumbs_up, thumbs_down, outing_id, long_restaurant_id) " +
                         "VALUES (?, 0, 0, ?, ?) " +
                         "RETURNING restaurant_id;";
-                Integer restaurantId = jdbcTemplate.queryForObject(sqlRestaurant, Integer.class, restaurantName, outingId, restaurantLongId );
+                Integer restaurantId = jdbcTemplate.queryForObject(sqlRestaurant, Integer.class, name, outingId, restaurantLongId );
                 restaurants.add(restaurantId);
             }
 

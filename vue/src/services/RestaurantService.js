@@ -27,16 +27,16 @@ export default{
         return baseUrl.get(`/api/outings/${outingId}`)
     }, 
 
-    addOuting(outing, currentToken){
+    addOuting(outing){
         
 
-        const headers = {
-            Authorization: `Bearer ${currentToken}`, 
-            'Content-Type': 'application/json'
-        };
+        // const headers = {
+        //     Authorization: `Bearer ${currentToken}`, 
+        //     'Content-Type': 'application/json'
+        // };
 
 
-        return baseUrl.post('/api/outings/newOutings', outing, {headers});
+        return baseUrl.post('/api/outings/newOuting', outing);
     }, 
 
     getOutingsByUserId(userId){

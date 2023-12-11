@@ -5,13 +5,13 @@
             <router-link v-bind:to="{name: 'outing-detail', params: {outingId: item.outingId}}">{{ item.name }}</router-link>
         </nav>
         <p>
-            {{ item.zipCode }}
+            Zip Code: {{ item.zipCode }}
         </p>
         <p>
-            {{ item.dateDeadline}}
+            Voting Ends: {{ dateDeadlineToDate(item.dateDeadline)  }}
         </p>
         <p>
-            {{ item.dateEvent }}
+            Event Date: {{ dateDeadlineToDate(item.dateEvent) }}
         </p>
 
 
@@ -34,6 +34,11 @@ export default {
                 .then((response) => {
                 this.outings = response.data;
             });
+        }, 
+
+        dateDeadlineToDate(dateDeadline){
+           let dueDate = new Date(dateDeadline);
+           return dueDate
         }
     },
     computed: {

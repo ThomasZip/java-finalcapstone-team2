@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS}, maxAge = 5000)
 @RestController
 @RequestMapping("api/outings")
 public class OutingController {
@@ -38,14 +38,14 @@ public class OutingController {
       return outingDao.getOutingsByCreatorId(creatorId);
   }
 
-    @RequestMapping(path = "/newOuting", method = RequestMethod.OPTIONS)
-    public ResponseEntity<Void> handleOptions() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-        headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        return new ResponseEntity<>(headers, HttpStatus.OK);
-    }
+//    @RequestMapping(path = "/newOuting", method = RequestMethod.OPTIONS)
+//    public ResponseEntity<Void> handleOptions() {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Access-Control-Allow-Origin", "*");
+//        headers.add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+//        headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//        return new ResponseEntity<>(headers, HttpStatus.OK);
+//    }
 
 
 }
