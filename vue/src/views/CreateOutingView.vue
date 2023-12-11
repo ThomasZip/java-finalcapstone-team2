@@ -23,7 +23,7 @@
             <router-link v-bind:to="{ name: 'restaurantsSearch' }">Search Restaurant to Add to Your Outing
             </router-link>
         </nav>
-        <div class="outing-list" v-for="item in iteratedRestaurants" v-bind:key="item.id">
+        <div class="outing-list" v-for="item in outing.restaurants" v-bind:key="item.id">
             {{ item.name }}
 
         </div>
@@ -58,13 +58,14 @@
         </router-link>
     </nav> -->
     <nav>
-        <router-link v-bind:to="{ name: 'home' }" v-on:click="clearOutingRestaurantsFromStore">Finalize Your Outing
+        <router-link v-bind:to="{ name: 'home' }" v-on:click="clearOutingRestaurantsFromStoreAndAddOutingToSql">Finalize Your Outing
         </router-link>
     </nav>
 </template>
 <!-- Does this push user to restaurants list? -->
 
 <script>
+import RestaurantService from '../services/RestaurantService';
 export default {
     data() {
         return {
@@ -75,8 +76,8 @@ export default {
                 dateEvent: '',
                 creator: this.$store.state.user.id,
                 guests: [],
-                restaurants: this.$store.state.storeOfRestaurantsInOuting,
-                id: ''
+                restaurants: [],
+                
             },
             localStorageOfStoreRestaurants: this.$store.state.storeOfRestaurantsInOuting,
 
@@ -103,20 +104,22 @@ export default {
         //     this.outing.outingRestaurants = this.localStorageOfStoreRestaurants.flat();
         // },
 
-        clearOutingRestaurantsFromStore() {
-            this.$store.commit('CLEAR_OUTING_RESTAURANTS')
+        clearOutingRestaurantsFromStoreAndAddOutingToSql() {
+            this.addOutingToSql(this.outing, this.currentToken);
+            this.$store.commit('CLEAR_OUTING_RESTAURANTS');
+            
         },
 
         iterateThroughOutingRestaurants() {
             let uniqueRestaurantsMap = new Map();
 
-            this.outing.restaurants.flat().forEach((restaurant) => {
+            this.localStorageOfStoreRestaurants.flat().forEach((restaurant) => {
                 if (!uniqueRestaurantsMap.has(restaurant.id)) {
                     uniqueRestaurantsMap.set(restaurant.id, restaurant);
                 }
             });
 
-            this.iteratedRestaurants = Array.from(uniqueRestaurantsMap.values());
+            this.outing.restaurants = Array.from(uniqueRestaurantsMap.values());
         },
 
         toggleIsFormShown() {
@@ -152,6 +155,10 @@ export default {
             this.outing.guests.push(this.guest);
             this.resetForm();
             this.iterateThroughGuests();
+        }, 
+
+        addOutingToSql(outing, currentToken){
+            RestaurantService.addOuting(outing, currentToken)
         }
 
     },
@@ -159,6 +166,12 @@ export default {
     mounted() {
         this.iterateThroughOutingRestaurants();
         this.iterateThroughGuests();
+    },
+
+    computed: {
+        currentToken(){
+            return this.$store.state.token;
+        }
     }
 
 

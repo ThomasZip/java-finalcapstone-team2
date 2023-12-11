@@ -3,13 +3,15 @@ package com.techelevator.controller;
 import com.techelevator.dao.JdbcOutingDao;
 import com.techelevator.dao.OutingDao;
 import com.techelevator.model.Outing;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("api/outings")
 public class OutingController {
@@ -35,6 +37,15 @@ public class OutingController {
   public List<Outing> getOutingByCreatorId(@PathVariable("creatorId") int creatorId){
       return outingDao.getOutingsByCreatorId(creatorId);
   }
+
+    @RequestMapping(path = "/newOuting", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleOptions() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+        headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        return new ResponseEntity<>(headers, HttpStatus.OK);
+    }
 
 
 }

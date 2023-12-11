@@ -5,6 +5,9 @@ import com.techelevator.model.BusinessSearchDao;
 import com.techelevator.model.Guest;
 import com.techelevator.model.Outing;
 import com.techelevator.model.Restaurant;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -43,12 +46,12 @@ public class JdbcOutingDao implements OutingDao {
                 returnedOuting = mapRowToOuting(outingResults);
             }
 
-            String restaurantSql = "SELECT restaurant_name, thumbs_up, thumbs_down, outing_id FROM restaurants WHERE outing_id = ?";
+            String restaurantSql = "SELECT restaurant_id, restaurant_name, thumbs_up, thumbs_down, outing_id, long_restaurant_id FROM restaurants WHERE outing_id = ?";
             SqlRowSet restaurantResults = jdbcTemplate.queryForRowSet(restaurantSql, outingId);
             List<Restaurant> restaurants = mapRowToRestaurants(restaurantResults);
             returnedOuting.setOutingRestaurants(restaurants);
 
-            String guestSql = "SELECT guest_name, email_address FROM guests WHERE outing_id = ?";
+            String guestSql = "SELECT guest_id, guest_name, email_address FROM guests WHERE outing_id = ?";
             SqlRowSet guestResults = jdbcTemplate.queryForRowSet(guestSql, outingId);
             List<Guest> guests = mapRowToGuests(guestResults);
             returnedOuting.setGuests(guests);
@@ -93,11 +96,12 @@ public class JdbcOutingDao implements OutingDao {
 
             for (int i = 0; i < outing.getOutingRestaurants().size(); i++ ) {
                 String restaurantName = outing.getOutingRestaurants().get(i).getRestaurantName();
+                String restaurantLongId = outing.getOutingRestaurants().get(i).getLongRestaurantId();
 
-                String sqlRestaurant = "INSERT INTO restaurants (restaurant_name, thumbs_up, thumbs_down, outing_id) " +
-                        "VALUES (?, 0, 0, ?) " +
+                String sqlRestaurant = "INSERT INTO restaurants (restaurant_name, thumbs_up, thumbs_down, outing_id, long_restaurant_id) " +
+                        "VALUES (?, 0, 0, ?, ?) " +
                         "RETURNING restaurant_id;";
-                Integer restaurantId = jdbcTemplate.queryForObject(sqlRestaurant, Integer.class, restaurantName, outingId );
+                Integer restaurantId = jdbcTemplate.queryForObject(sqlRestaurant, Integer.class, restaurantName, outingId, restaurantLongId );
                 restaurants.add(restaurantId);
             }
 
@@ -127,6 +131,7 @@ public class JdbcOutingDao implements OutingDao {
 
         while(rs.next()){
             Guest guest = new Guest();
+            guest.setGuestId(rs.getInt("guest_id"));
             guest.setName(rs.getString("guest_name"));
             guest.setEmailAddress(rs.getString("email_address"));
             guests.add(guest);
@@ -139,9 +144,11 @@ public class JdbcOutingDao implements OutingDao {
 
         while(rs.next()){
             Restaurant restaurant = new Restaurant();
+            restaurant.setRestaurantId(rs.getInt("restaurant_id"));
             restaurant.setRestaurantName(rs.getString("restaurant_name"));
             restaurant.setThumbsDown(rs.getInt("thumbs_down"));
             restaurant.setThumbsUp(rs.getInt("thumbs_up"));
+            restaurant.setLongRestaurantId(rs.getString("long_restaurant_id"));
             restaurants.add(restaurant);
         }
         return restaurants;
@@ -158,6 +165,8 @@ public class JdbcOutingDao implements OutingDao {
 
         return outing;
     }
+
+
 
 
 
