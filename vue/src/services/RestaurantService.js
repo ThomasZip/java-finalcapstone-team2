@@ -41,6 +41,10 @@ export default{
 
     getOutingsByUserId(userId){
         return baseUrl.get(`/api/outings/creator/${userId}`)
+    },
+
+    updateRestaurant(restaurant, restaurantId){
+        return baseUrl.put(`/api/outings/updateVotes/${restaurantId}`, restaurant)
     }
 
     
