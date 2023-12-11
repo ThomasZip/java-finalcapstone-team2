@@ -45,6 +45,10 @@ export default{
 
     updateRestaurant(restaurant, restaurantId){
         return baseUrl.put(`/api/outings/updateVotes/${restaurantId}`, restaurant)
+    }, 
+
+    getOutingFinalists(outingId){
+        return baseUrl.get(`/api/outings/finalists/${outingId}`)
     }
 
     

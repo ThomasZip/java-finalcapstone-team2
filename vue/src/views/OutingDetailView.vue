@@ -9,19 +9,23 @@
     </h3>
     <h4>Number of Votes Remaining {{ currentNumberOfVotes }} </h4>
     <h2>The restaurants up for consideration are:
-        <div v-for="(restaurant) in outing.outingRestaurants" v-bind:key="restaurant.restaurantId">
+        <div v-for="(restaurant, index) in outing.outingRestaurants" v-bind:key="restaurant.restaurantId">
             {{ restaurant.restaurantName }}
-            <button type="button" v-on:click="getRestaurantDetails(restaurant.longRestaurantId)">Click here for restaurant
+            <button type="button" v-on:click="getRestaurantDetails(index, restaurant.longRestaurantId)">Click here for
+                restaurant
                 details</button>
-            <div v-if="restaurantDetails">
-                <p>Price: {{ restaurantDetails.price }} </p>
-                <p>Phone Number: {{ restaurantDetails.phone }}</p>
+            <div v-if="restaurantDetails[index]">
+                <p>Price: {{ restaurantDetails[index].price }} </p>
+                <p>Phone Number: {{ restaurantDetails[index].phone }}</p>
+                <p>Rating: {{ restaurantDetails[index].rating }}</p>
+                <p>Location: {{ restaurantDetails[index].location.address1 }}</p>
+                <p>Category: {{ restaurantDetails[index].categories[0].title }}</p>
                 <p>Thumbs Up: {{ restaurant.thumbsUp }}</p>
                 <p>Thumbs Down: {{ restaurant.thumbsDown }}</p>
                 <div v-if="!permissionsRemoved">
                     <button id="voteButton" v-on:click="clickThumbsUp(restaurant)">Like </button>
                     <button id="voteButton" v-on:click="clickThumbsDown(restaurant)">Dislike </button>
-                    <button id="save" v-on:click="sendUpdate(restaurant,restaurant.restaurantId)">Save Vote</button>
+                    <button id="save" v-on:click="sendUpdate(restaurant, restaurant.restaurantId)">Save Vote</button>
                 </div>
             </div>
         </div>
@@ -38,9 +42,6 @@ export default {
             linkToShare: this.$route.fullPath,
             currentNumberOfVotes: 0,
             permissionsRemoved: false
-
-
-
 
         };
     },
@@ -64,11 +65,17 @@ export default {
                     this.checkPermissions()
                 });
         },
-        getRestaurantDetails(longId) {
-            RestaurantService.getRestaurantDetails(longId)
-                .then((response) => {
-                    this.restaurantDetails = response.data;
-                });
+        async getRestaurantDetails(index, longId) {
+            try {
+                const response = await RestaurantService.getRestaurantDetails(longId);
+                this.rating = response.data.rating;
+                this.location = response.data.location;
+                this.category = response.data.category;
+                console.log(this.rating);
+                this.restaurantDetails.splice(index, 1, response.data);
+            } catch (error) {
+                console.error('Error fetching restaurant details:', error);
+            }
         },
         dateDeadlineToDate(dateDeadline) {
             let dueDate = new Date(dateDeadline);
@@ -96,8 +103,11 @@ export default {
             const deadlineDate = new Date(this.outing.dateDeadline);
             //  voteButton.disabled = true;
             this.permissionsRemoved = currentDate > deadlineDate;
+            if (this.permissionsRemoved) {
+                this.$router.push({ name: 'finalists' })
+            }
         },
-        sendUpdate(restaurant, restaurantId){
+        sendUpdate(restaurant, restaurantId) {
             RestaurantService.updateRestaurant(restaurant, restaurantId)
         }
 

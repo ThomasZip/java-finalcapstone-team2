@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.JdbcOutingDao;
 import com.techelevator.dao.OutingDao;
 import com.techelevator.model.Outing;
+import com.techelevator.model.Restaurant;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,11 @@ public class OutingController {
   @RequestMapping(path = "/creator/{creatorId}", method = RequestMethod.GET)
   public List<Outing> getOutingByCreatorId(@PathVariable("creatorId") int creatorId){
       return outingDao.getOutingsByCreatorId(creatorId);
+  }
+
+  @RequestMapping(path = "/finalists/{outingId}", method = RequestMethod.GET)
+  public List<Restaurant> getOutingFinalists(@PathVariable("outingId") int outingId){
+      return outingDao.getOutingFinalists(outingId);
   }
 
 //    @RequestMapping(path = "/newOuting", method = RequestMethod.OPTIONS)

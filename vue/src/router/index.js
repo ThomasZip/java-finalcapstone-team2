@@ -11,6 +11,7 @@ import RestaurantDisplayView from '../views/RestaurantDisplayView.vue';
 import CreateOutingView from '../views/CreateOutingView.vue';
 import MyOutingsView from '../views/MyOutingsView.vue';
 import OutingDetailView from '../views/OutingDetailView.vue';
+import FinalistView from '../views/FinalistView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -99,6 +100,14 @@ const routes = [
     component: OutingDetailView, 
     meta:{
       requiresAuth: false
+    }
+  },
+  {
+    path: "/myOutings/:outingId/finalists",
+    name:"finalists",
+    component: FinalistView,
+    meta:{
+      requiresAuth:true
     }
   }
 ];
