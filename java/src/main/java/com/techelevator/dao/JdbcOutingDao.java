@@ -132,10 +132,10 @@ public class JdbcOutingDao implements OutingDao {
         List<Restaurant> returnedFinalists;
         String sql = "SELECT restaurant_id, restaurant_name, thumbs_up, thumbs_down, outing_id, long_restaurant_id, (thumbs_up - thumbs_down) AS diff " +
                 "FROM restaurants " +
-                "WHERE outing_id = ? AND (thumbs_up - thumbs_down) = (SELECT MAX(thumbs_up - thumbs_down) FROM restaurants);";
+                "WHERE outing_id = ? AND (thumbs_up - thumbs_down) = (SELECT MAX(thumbs_up - thumbs_down) FROM restaurants WHERE outing_id = ?);";
 
         try{
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, outingId);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, outingId, outingId);
             returnedFinalists = mapRowToRestaurants(results);
         }catch (Exception e){
             throw e;
