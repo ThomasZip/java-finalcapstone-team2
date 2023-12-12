@@ -43,7 +43,7 @@ export default{
         return baseUrl.get(`/api/outings/creator/${userId}`)
     },
 
-    updateRestaurant(restaurant, restaurantId){
+    updateRestaurant(restaurantId, restaurant ){
         return baseUrl.put(`/api/outings/updateVotes/${restaurantId}`, restaurant)
     }, 
 

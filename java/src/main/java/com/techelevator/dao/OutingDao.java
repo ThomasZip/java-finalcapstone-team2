@@ -13,4 +13,5 @@ public interface OutingDao {
 //    public Outing updateOutingWithVotes(Outing outingToUpdate);
     public List<Outing> getOutingsByCreatorId(int creatorId);
     public List<Restaurant> getOutingFinalists(int OutingId);
+    public void updateVotes(int restaurantId, Restaurant restaurant);
 }

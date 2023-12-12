@@ -44,6 +44,12 @@ public class OutingController {
       return outingDao.getOutingFinalists(outingId);
   }
 
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  @RequestMapping(path= "/updateVotes/{restaurantId}", method = RequestMethod.PUT)
+  public void updateVotes(@PathVariable("restaurantId") int restaurantId, @RequestBody Restaurant restaurant){
+      outingDao.updateVotes(restaurantId, restaurant);
+  }
+
 //    @RequestMapping(path = "/newOuting", method = RequestMethod.OPTIONS)
 //    public ResponseEntity<Void> handleOptions() {
 //        HttpHeaders headers = new HttpHeaders();

@@ -14,19 +14,22 @@
             <button type="button" v-on:click="getRestaurantDetails(index, restaurant.longRestaurantId)">Click here for
                 restaurant
                 details</button>
+            <p>Thumbs Up: {{ restaurant.thumbsUp }}</p>
+            <p>Thumbs Down: {{ restaurant.thumbsDown }}</p>
+            <div>
+                <button id="voteButton" v-on:click="clickThumbsUp(restaurant)">Like </button>
+                <button id="voteButton" v-on:click="clickThumbsDown(restaurant)">Dislike </button>
+                <button id="save" v-on:click="sendUpdate(restaurant.restaurantId, restaurant)">Save Vote</button>
+            </div>
             <div v-if="restaurantDetails[index]">
                 <p>Price: {{ restaurantDetails[index].price }} </p>
                 <p>Phone Number: {{ restaurantDetails[index].phone }}</p>
                 <p>Rating: {{ restaurantDetails[index].rating }}</p>
                 <p>Location: {{ restaurantDetails[index].location.address1 }}</p>
                 <p>Category: {{ restaurantDetails[index].categories[0].title }}</p>
-                <p>Thumbs Up: {{ restaurant.thumbsUp }}</p>
-                <p>Thumbs Down: {{ restaurant.thumbsDown }}</p>
-                <div v-if="!permissionsRemoved">
-                    <button id="voteButton" v-on:click="clickThumbsUp(restaurant)">Like </button>
-                    <button id="voteButton" v-on:click="clickThumbsDown(restaurant)">Dislike </button>
-                    <button id="save" v-on:click="sendUpdate(restaurant, restaurant.restaurantId)">Save Vote</button>
-                </div>
+                <img v-bind:src="restaurantDetails[index].photos[1] "   />
+
+
             </div>
         </div>
     </h2>
@@ -107,8 +110,8 @@ export default {
                 this.$router.push({ name: 'finalists' })
             }
         },
-        sendUpdate(restaurant, restaurantId) {
-            RestaurantService.updateRestaurant(restaurant, restaurantId)
+        sendUpdate(restaurantId, restaurant ) {
+            RestaurantService.updateRestaurant(restaurantId, restaurant )
         }
 
     },

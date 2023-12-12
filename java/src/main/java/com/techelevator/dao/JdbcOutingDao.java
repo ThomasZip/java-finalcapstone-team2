@@ -143,6 +143,21 @@ public class JdbcOutingDao implements OutingDao {
         return returnedFinalists;
     }
 
+    public void updateVotes(int restaurantId, Restaurant restaurant) {
+        String sql = "UPDATE restaurants SET thumbs_up = ?, thumbs_down = ?" +
+                " WHERE restaurant_id = ?;";
+        int numOfRows = 0;
+
+        try {
+            numOfRows = jdbcTemplate.update(sql,restaurant.getThumbsUp(),restaurant.getThumbsDown(),restaurantId);
+            if(numOfRows == 0){
+                throw new DaoException("Zero rows affected, expected one.");
+            }
+        } catch (Exception e){
+            throw e;
+        }
+    }
+
     private List<Guest> mapRowToGuests(SqlRowSet rs){
         List<Guest> guests = new ArrayList<>();
 
