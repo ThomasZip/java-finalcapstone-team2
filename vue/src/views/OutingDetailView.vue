@@ -1,5 +1,6 @@
 <template>
     <h1>{{ outing.name }}</h1>
+    <router-link v-bind:to="{name:'my-outings'}" > Go Back</router-link> 
     <h2>Link to share: http://127.0.0.1:5173{{ linkToShare }}</h2>
     <h3 v-if="permissionsRemoved">Your permissions are removed as the deadline has passed.</h3>
     <h3>You can vote on this outing until {{ dateDeadlineToDate(outing.dateDeadline) }}</h3>

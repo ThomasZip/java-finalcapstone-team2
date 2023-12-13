@@ -1,44 +1,98 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+  <div id="homeView">
+    <div class="home">
+      <h1>Home</h1>
+
+    </div>
+    <section id="option-cards">
+
+      <div class="restaurants-search-div" v-on:click="sendToSearch">
+        <p>Click the Icon to Search Restaurants for Your Outing</p>
+        <nav>
+          <img src="public\search.png" />
+        </nav>
+      </div>
+
+      <div class="my-outings-div">
+        <p>See The Outings You've Created</p>
+        <nav v-on:click="sendToMyOutings">
+          <img src="public\list.png" />
+        </nav>
+      </div>
+
+
+
+    </section>
   </div>
-  <nav id="restaurants-search-nav">
-    <router-link v-bind:to="{ name: 'restaurantsSearch' }">Search for Restaurants</router-link>
-  </nav>
-  <nav id="create-outings-div">
-    <router-link v-bind:to="{name: 'create-outing', params:{userId: this.$store.state.user.id}}">Create New Outing</router-link>
-  </nav>
-  <nav id="my-outings-div">
-    <router-link v-bind:to="{ name: 'my-outings' }">See My Outings</router-link>
-  </nav>
 </template>
 <script>
 
 export default {
+  methods: {
+    sendToSearch() {
+      this.$router.push({ name: 'restaurantsSearch' });
+    },
+    sendToMyOutings() {
+      this.$router.push({ name: 'my-outings' })
+    }
+  }
 
-  
+
 
 };
 </script>
 <style>
+#option-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+#option-cards .restaurants-search-div,
+#option-cards .my-outings-div {
+  display: flex;
+  flex-direction: column;
+  border: 5px;
+  border-color: black;
+  border-style: solid;
+  padding: 1%;
+  margin: 2%;
+  width: 10%;
+  height: 10%;
+
+}
+
+#option-cards p {
+  margin-top: 0;
+}
+
+#option-cards .my-outings-div {
+  align-self: center;
+  padding: 1.5%;
+  background-color: #D61406
+
+}
+
+#option-cards .restaurants-search-div {
+  align-self: flex-start;
+  background-color: #FBF17A;
+  
+
+}
+
 nav {
   padding: 20px;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 10px;
   text-align: center;
+
+
 }
 
-#restaurants-search-nav {
-  background-color: rgb(139, 228, 139);
-}
+#homeView {
+  background-image: url("C:\Users\Student\workspace\java-finalcapstone-team2\vue\public\home.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 
-#create-outings-div {
-  background-color: rgb(139, 192, 228);
-}
-
-#my-outings-div {
-  background-color: rgb(207, 157, 207);
 }
 </style>

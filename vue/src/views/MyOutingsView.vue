@@ -1,5 +1,6 @@
 <template>
     <h1>see my current outings</h1>
+    <router-link v-bind:to="{name:'home'}" > Go Back</router-link> 
     <div v-for="item in outings" v-bind:key="item.outingId">
         <nav>
             <router-link v-bind:to="{name: 'outing-detail', params: {outingId: item.outingId}}">{{ item.name }}</router-link>

@@ -1,28 +1,31 @@
 <template>
-  <div id="login">
-    <form v-on:submit.prevent="login">
-      <h1 >Please Sign In</h1>
-      <div role="alert" v-if="invalidCredentials">
-        Invalid username and password!
-      </div>
-      <div role="alert" v-if="this.$route.query.registration">
-        Thank you for registering, please sign in.
-      </div>
-      <div class="form-input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
-      </div>
-      <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
-      </div>
-      <div id="button-div">
-      <button type="submit">Sign in</button>
-      </div>
-      <p>
-      <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
-    </form>
-  </div>
+  <body>
+    <div id="login">
+      <form v-on:submit.prevent="login">
+        <h1>Please Sign In</h1>
+        <div role="alert" v-if="invalidCredentials">
+          Invalid username and password!
+        </div>
+        <div role="alert" v-if="this.$route.query.registration">
+          Thank you for registering, please sign in.
+        </div>
+        <div class="form-input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" v-model="user.username" required autofocus />
+        </div>
+        <div class="form-input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model="user.password" required />
+        </div>
+        <div id="button-div">
+          <button type="submit">Sign in</button>
+        </div>
+        <p>
+          <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
+        </p>
+      </form>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -67,27 +70,38 @@ export default {
   /* input boxes */
   margin-bottom: 1rem;
 }
+
 label {
-   /* input boxes */
+  /* input boxes */
   margin-right: 0.5rem;
 }
+
 #login {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 0%;
+  margin-bottom: 0%;
   margin-left: 30%;
   margin-right: 30%;
   background-color: rgb(184, 167, 167);
 }
-h1, p {
+
+h1,
+p {
   text-align: center;
 }
+
 #button-div {
   text-align: center;
 }
-.form-input-group{
+
+.form-input-group {
   display: flex;
   justify-content: space-between;
 }
-</style>
+
+body {
+  background-color: #871919;
+}</style>
+

@@ -1,5 +1,6 @@
 <template>
     <h1>Your Finalists!!</h1>
+    <router-link v-bind:to="{name:'my-outings'}" > Go Back</router-link> 
     <div v-for="(item, index) in finalistsArray" v-bind:key="item.restaurantId">
         <h2>
             {{ item.restaurantName }}

@@ -15,4 +15,16 @@
   padding: 5px;
   font-weight: bold;
 }
+/* 
+#capstone-app {
+  background-color: #871919;
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+} */
+
+body {
+  margin: 0px;
+}
+
 </style>
