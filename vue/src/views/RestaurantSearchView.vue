@@ -1,7 +1,7 @@
 <template>
     <div id="backRound">
         <div id="search-form">
-            <form class="zipcode-form" v-on:submit.prevent="onSubmit">
+            <section class="zipcode-form" >
                 <div class="field">
                     <h1>Search for Restaurants</h1>
                     <div class="input-div">
@@ -16,10 +16,10 @@
                             v-bind:required="false" @keydown.space.prevent />
                     </div>
                 </div>
-                <div id="button-div">
-                    <button type="submit" value="Save" class="btn save">Go</button>
-                </div>
-            </form>
+                <nav id="button-div">
+                    <img src='/search.png' v-on:click="onSubmit"/>
+                </nav>
+            </section>
         </div>
     </div>
 </template>
@@ -57,6 +57,7 @@ export default {
     background-size: cover;
     background-position: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 #search-form {
@@ -67,16 +68,23 @@ export default {
     padding: 20px;
     flex-grow: 1;
     height: 100vh;
+    color: rgb(241, 197, 95)
+
 
 
 }
 .zipcode-form{
-    background-color: #fbf17a;
+    background-color: rgb(135, 25, 25, 0.9);
+    border-radius: 25px;
 }
 
 h1,
 p {
     text-align: center;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
 }
 
 #button-div {

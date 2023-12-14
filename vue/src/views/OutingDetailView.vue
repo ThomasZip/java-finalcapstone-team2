@@ -1,39 +1,63 @@
 <template>
-    <h1>{{ outing.name }}</h1>
-    <router-link v-bind:to="{name:'my-outings'}" > Go Back</router-link> 
-    <h2>Link to share: http://127.0.0.1:5173{{ linkToShare }}</h2>
-    <h3 v-if="permissionsRemoved">Your permissions are removed as the deadline has passed.</h3>
-    <h3>You can vote on this outing until {{ dateDeadlineToDate(outing.dateDeadline) }}</h3>
-    <h3>This outing will take place on {{ dateDeadlineToDate(outing.dateEvent) }}</h3>
-    <h3>The guests attending this event are
-        <p v-for="guest in outing.guests" v-bind:key="guest.guest_id">{{ guest.name }}</p>
-    </h3>
-    <h4>Number of Votes Remaining {{ currentNumberOfVotes }} </h4>
-    <h2>The restaurants up for consideration are:
-        <div v-for="(restaurant, index) in outing.outingRestaurants" v-bind:key="restaurant.restaurantId">
-            {{ restaurant.restaurantName }}
-            <button type="button" v-on:click="getRestaurantDetails(index, restaurant.longRestaurantId)">Click here for
-                restaurant
-                details</button>
-            <p>Thumbs Up: {{ restaurant.thumbsUp }}</p>
-            <p>Thumbs Down: {{ restaurant.thumbsDown }}</p>
-            <div>
-                <button id="voteButton" v-on:click="clickThumbsUp(restaurant)">Like </button>
-                <button id="voteButton" v-on:click="clickThumbsDown(restaurant)">Dislike </button>
-                <button id="save" v-on:click="sendUpdate(restaurant.restaurantId, restaurant)">Save Vote</button>
+    
+        <div id="allOutingDetail">
+
+            <div id="header">
+                <h1>{{ outing.name }}</h1>
+                <p>Vote for your favorite restaurants</p>
             </div>
-            <div v-if="restaurantDetails[index]">
-                <p>Price: {{ restaurantDetails[index].price }} </p>
-                <p>Phone Number: {{ restaurantDetails[index].phone }}</p>
-                <p>Rating: {{ restaurantDetails[index].rating }}</p>
-                <p>Location: {{ restaurantDetails[index].location.address1 }}</p>
-                <p>Category: {{ restaurantDetails[index].categories[0].title }}</p>
-                <img v-bind:src="restaurantDetails[index].photos[1] "   />
+            <img src="/logo.png" id="logoOuting" />
+            <div id="info">
+                <div id="firstPanel">
+                    <h2 id="shareHeading">Share this link with your friends:</h2>
+                    <h5> http://127.0.0.1:5173{{ linkToShare }}</h5>
+                    <h3 v-if="permissionsRemoved">Your permissions are removed as the deadline has passed.</h3>
+                    <h3>You can vote on this outing until: </h3>
+                    <h5>{{ dateDeadlineToDate(outing.dateDeadline) }}</h5>
+                    <h3>This outing will take place on: </h3>
+                    <h5>{{ dateDeadlineToDate(outing.dateEvent) }}</h5>
+                    <h3>The guests attending this event are
+                        <p v-for="guest in outing.guests" v-bind:key="guest.guest_id" id="guestName">{{ guest.name }}</p>
+                    </h3>
 
+                </div>
+                <div id="secondPanel">
+                    <h2>Number of Votes Remaining: {{ currentNumberOfVotes }} </h2>
 
+                    <h3 id="forConsideration">The restaurants up for consideration are:</h3>
+
+                    <div v-for="(restaurant, index) in outing.outingRestaurants" v-bind:key="restaurant.restaurantId"
+                        id="votingFlex">
+                        <div id="restNameAndBtn">
+                            {{ restaurant.restaurantName }}
+                            <button type="button" class="btn"
+                                v-on:click="getRestaurantDetails(index, restaurant.longRestaurantId)" id="detailsBtn">Click
+                                For
+                                Details</button>
+                        </div>
+
+                        <div v-if="restaurantDetails[index]" id="detailsDetails">
+                            <h4>Price: {{ restaurantDetails[index].price }} </h4>
+                            <h4>Phone Number: {{ restaurantDetails[index].phone }}</h4>
+                            <h4>Rating: {{ restaurantDetails[index].rating }}</h4>
+                            <h4>Location: {{ restaurantDetails[index].location.address1 }}</h4>
+                            <h4>Category: {{ restaurantDetails[index].categories[0].title }}</h4>
+                            <img v-bind:src="restaurantDetails[index].photos[1]" />
+                        </div>
+                        <p>Thumbs Up: {{ restaurant.thumbsUp }}</p>
+                        <p>Thumbs Down: {{ restaurant.thumbsDown }}</p>
+                        <div>
+                            <button id="voteButton" class="btn" v-on:click="clickThumbsUp(restaurant)">Like </button>
+                            <button id="voteButton" class="btn" v-on:click="clickThumbsDown(restaurant)">Dislike </button>
+                            <button id="save" class="btn" v-on:click="sendUpdate(restaurant.restaurantId, restaurant)">Save
+                                Vote</button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-    </h2>
+    
 </template>
 <script>
 import RestaurantService from '../services/RestaurantService';
@@ -111,8 +135,8 @@ export default {
                 this.$router.push({ name: 'finalists' })
             }
         },
-        sendUpdate(restaurantId, restaurant ) {
-            RestaurantService.updateRestaurant(restaurantId, restaurant )
+        sendUpdate(restaurantId, restaurant) {
+            RestaurantService.updateRestaurant(restaurantId, restaurant)
         }
 
     },
@@ -124,4 +148,130 @@ export default {
 
 }
 </script>
-<style></style>
+<style>
+#allOutingDetail {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/1819669/pexels-photo-1819669.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-position: center;
+
+}
+
+#header p {
+    color: #FFFFFF;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    font-weight: 100;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    gap: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    margin-right: 45px;
+
+    padding-left: 35px;
+    padding-bottom: 35px;
+}
+
+#firstPanel {
+    background-color: rgb(204, 197, 201, 0.8);
+    border-radius: 30px;
+}
+
+#secondPanel {
+    background-color: rgb(204, 197, 201, 0.8);
+    border-radius: 30px;
+}
+
+#shareHeading {
+    margin-bottom: 0px;
+}
+
+h4 {
+    font-size: 40px;
+    margin-bottom: 0px;
+    color: rgb(135, 25, 25);
+}
+
+h3 {
+    margin-bottom: 0px;
+}
+
+h5 {
+    margin-top: 20px;
+    font-size: 40px;
+    color: rgb(135, 25, 25);
+}
+
+#forPadding {
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-bottom: 55px;
+}
+
+#guestName {
+    color: rgb(135, 25, 25);
+}
+
+#votingFlex {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+#restNameAndBtn {
+    display: flex;
+    flex-direction: column;
+    color: rgb(135, 25, 25);
+}
+
+#detailsDetails,
+#detailsDetails h4 {
+    color: black;
+}
+
+#detailsBtn {
+    margin-top: 25px;
+    align-self: center;
+}
+
+#forConsideration {
+    padding-bottom: 25px;
+}
+
+.btn {
+    padding: 8p 14px;
+    cursor: pointer;
+    border: 2px solid #0f172a;
+    box-shadow: 2px 2px 0 0 #ffffff, 4px 4px 0 0 #0f172a;
+    transition-duration: 200ms;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: large
+}
+
+.btn:hover {
+    box-shadow: 3px 3px #ffffff, 6px 6px 0 0 #0f172a;
+    transform: translate(-2px, -2px);
+}
+
+#logoOuting {
+
+    height: 300px;
+    width: 300px;
+
+}</style>

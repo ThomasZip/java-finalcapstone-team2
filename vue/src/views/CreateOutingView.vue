@@ -1,24 +1,25 @@
 <template>
     <div id="main-div-outing">
         <h1>Create Outing</h1>
-        <div class="input-div">
-            <label for="nameInput">Name Your Outing:&nbsp;</label>
+        <div id="fullForm">
+
+            <label id="nameLabel" for="nameInput">Name Your Outing:&nbsp;</label>
             <input id="nameInput" name="nameInput" type="text" v-model="outing.name" v-bind:required="true" />
-        </div>
-        <div class="input-div">
-            <label for="zipcodeInput">Enter a Zipcode:&nbsp;</label>
+
+            <label id="zipLabel" for="zipcodeInput">Enter a Zipcode:&nbsp;</label>
             <input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipCode" />
-        </div>
-        <div class="input-div">
-            <label for="deadlineInput">Date of final decision:&nbsp;</label>
+
+            <label id="deadLabel" for="deadlineInput">Date of final decision:&nbsp;</label>
             <input id="deadlineInput" name="deadlineInput" type="datetime-local" v-model="outing.dateDeadline"
                 v-bind:required="true" />
-        </div>
-        <div class="input-div">
-            <label for="eventInput">Date of actual event:&nbsp;</label>
+
+            <label id="eventLabel" for="eventInput">Date of actual event:&nbsp;</label>
             <input id="eventInput" name="eventInput" type="datetime-local" v-model="outing.dateEvent"
                 v-bind:required="true" />
+
+
         </div>
+
         <nav class="nav-div-search">
             <router-link v-bind:to="{ name: 'restaurantsSearch' }">Search Restaurant to Add to Your Outing
             </router-link>
@@ -37,17 +38,22 @@
         <form v-show="isFormShown" @submit.prevent>
             <div class="input-div">
                 <label for="guestName">Guest's Name:</label>
-                <input id="guestName" type="text" v-model="guest.name"/>
+                <input id="guestName" type="text" v-model="guest.name" />
             </div>
             <div class="input-div">
                 <label for="guestEmail">Guest's Email:</label>
-                <input id="guestEmail" type="text" v-model="guest.email"/>
+                <input id="guestEmail" type="text" v-model="guest.email" />
             </div>
             <div id="button-div">
                 <button type="submit" v-on:click="addGuest">Save</button>
                 <!-- click to submit, adds guest's name -->
             </div>
         </form>
+        <nav>
+            <router-link v-bind:to="{ name: 'home' }" v-on:click="clearOutingRestaurantsFromStoreAndAddOutingToSql">Finalize
+                Your Outing
+            </router-link>
+        </nav>
 
         <!-- <div id="button-div">
             <button type="submit">Create Outing</button>
@@ -57,10 +63,6 @@
         <router-link v-bind:to="{ name: 'restaurantsSearch' }">Search Restaurant to Add to Your Outing
         </router-link>
     </nav> -->
-    <nav>
-        <router-link v-bind:to="{ name: 'home' }" v-on:click="clearOutingRestaurantsFromStoreAndAddOutingToSql">Finalize Your Outing
-        </router-link>
-    </nav>
 </template>
 <!-- Does this push user to restaurants list? -->
 
@@ -77,7 +79,7 @@ export default {
                 creator: this.$store.state.user.id,
                 guests: [],
                 outingRestaurants: [],
-                
+
             },
             outingToPost: {
                 name: '',
@@ -117,7 +119,7 @@ export default {
             this.filterOuting();
             this.addOutingToSql(this.outingToPost);
             this.$store.commit('CLEAR_OUTING_RESTAURANTS');
-            
+
         },
 
         iterateThroughOutingRestaurants() {
@@ -165,28 +167,28 @@ export default {
             this.outing.guests.push(this.guest);
             this.resetForm();
             this.iterateThroughGuests();
-            
-        }, 
 
-        addOutingToSql(outing){
+        },
+
+        addOutingToSql(outing) {
             //does this need a .then()? 
             RestaurantService.addOuting(outing)
         },
 
-        filterOuting(){
+        filterOuting() {
             this.outingToPost.name = this.outing.name;
-            this.outingToPost.creatorId= this.outing.creator;
+            this.outingToPost.creatorId = this.outing.creator;
             this.outingToPost.zipCode = this.outing.zipCode;
             this.outingToPost.dateDeadline = this.outing.dateDeadline;
             this.outingToPost.dateEvent = this.outing.dateEvent;
-            for(let i = 0; i < this.outing.guests.length; i++){
-                this.outingToPost.guests.push( {
+            for (let i = 0; i < this.outing.guests.length; i++) {
+                this.outingToPost.guests.push({
                     emailAddress: this.outing.guests[i].email,
                     name: this.outing.guests[i].name
                 });
             }
-            for(let i = 0; i < this.outing.outingRestaurants.length; i++){
-                this.outingToPost.outingRestaurants.push( {
+            for (let i = 0; i < this.outing.outingRestaurants.length; i++) {
+                this.outingToPost.outingRestaurants.push({
                     longRestaurantId: this.outing.outingRestaurants[i].id,
                     restaurantName: this.outing.outingRestaurants[i].name
                 });
@@ -203,7 +205,7 @@ export default {
     },
 
     computed: {
-        currentToken(){
+        currentToken() {
             return this.$store.state.token;
         }
     }
@@ -215,11 +217,13 @@ export default {
 
 <style>
 #main-div-outing {
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
+
     padding: 10px;
-    background-color: rgb(139, 192, 228);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/create.jpg');
+    background-size: cover;
+    background-position: center;
+
+
 }
 
 h1,
@@ -235,7 +239,7 @@ p {
 .input-div {
     padding: 5px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     padding: 5px;
 }
@@ -247,7 +251,7 @@ button {
 }
 
 .nav-div-search {
-    background-color: rgb(139, 228, 139);
+
     padding: 1%;
     margin-top: 20px;
     margin-right: 20%;
@@ -256,10 +260,82 @@ button {
 }
 
 .outing-list {
-    background-color: rgb(218, 235, 122);
+    background-color: rgb(39, 39, 48, 0.6);
     margin-left: 20%;
     margin-right: 20%;
     padding: 1%;
 
 }
+
+#fullForm{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "nameLabel nameIn"
+        "zipLabel zipIn"
+        "deadLabel deadIn"
+        "eventLabel eventIn";
+        
+    background-color: rgb(214,20,6, 0.7) ;
+    gap: 10px;
+    border-radius: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    color: white;
+    
+}
+#nameLabel{
+    grid-area: nameLabel;
+}
+#zipLabel{
+    grid-area: zipLabel;
+}
+#deadLabel{
+    grid-area: deadLabel;
+}
+#eventLabel{
+    grid-area: eventLabel;
+}
+#nameInput{
+    grid-area: nameIn;
+}
+#zipcodeInput{
+    grid-area: zipIn;
+}
+#deadlineInput{
+    grid-area: deadIn;
+}
+#eventInput{
+    grid-area: eventIn;
+}
+input{
+    display: flex;
+    height: 30px;
+    width: 300px;
+    align-self: center;
+    margin-left: 200px;
+}
+
+
+/* <div id="fullForm">
+
+<label id="nameLabel" for="nameInput">Name Your Outing:&nbsp;</label>
+<input id="nameInput" name="nameInput" type="text" v-model="outing.name" v-bind:required="true" />
+
+<label id="zipLabel" for="zipcodeInput">Enter a Zipcode:&nbsp;</label>
+<input id="zipcodeInput" name="zipcodeInput" type="text" v-model="outing.zipCode" />
+
+<label id="deadLabel" for="deadlineInput">Date of final decision:&nbsp;</label>
+<input id="deadlineInput" name="deadlineInput" type="datetime-local" v-model="outing.dateDeadline"
+    v-bind:required="true" />
+
+<label id="eventLabel" for="eventInput">Date of actual event:&nbsp;</label>
+<input id="eventInput" name="eventInput" type="datetime-local" v-model="outing.dateEvent"
+    v-bind:required="true" />
+
+
+</div> */
+
 </style>
