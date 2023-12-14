@@ -14,6 +14,14 @@
   </div>
 </template>
 <style>
+
+#capstone-app {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('/Login Background.png');
+  background-size: cover;
+  overflow: scroll;
+  height: 100vh;
+}
+
 #nav {
   display: flex;
   padding: 0px;

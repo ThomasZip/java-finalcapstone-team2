@@ -35,13 +35,13 @@
             {{ item.name }} ({{ item.email }})
 
         </div>
-        <form v-show="isFormShown" @submit.prevent>
+        <form v-show="isFormShown" @submit.prevent id="guestForm">
             <div class="input-div">
-                <label for="guestName">Guest's Name:</label>
+                <label id="guestLabel" for="guestName">Guest's Name:</label>
                 <input id="guestName" type="text" v-model="guest.name" />
             </div>
             <div class="input-div">
-                <label for="guestEmail">Guest's Email:</label>
+                <label id="emailLabel" for="guestEmail">Guest's Email:</label>
                 <input id="guestEmail" type="text" v-model="guest.email" />
             </div>
             <div id="button-div">
@@ -222,6 +222,7 @@ export default {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/create.jpg');
     background-size: cover;
     background-position: center;
+    height: 100vh;
 
 
 }
@@ -232,8 +233,12 @@ p {
 }
 
 #button-div {
+    grid-area: button;
+    display: flex;
     text-align: center;
     padding-top: 15px;
+    justify-content: center;
+    align-items: center;
 }
 
 .input-div {
@@ -260,10 +265,14 @@ button {
 }
 
 .outing-list {
-    background-color: rgb(39, 39, 48, 0.6);
+    background-color: rgba(52, 45, 45, 0.8);
     margin-left: 20%;
     margin-right: 20%;
     padding: 1%;
+    border-radius: 25px;
+    color: white;
+    margin-bottom: 15px;
+   
 
 }
 
@@ -284,8 +293,42 @@ button {
     padding-bottom: 20px;
     padding-top: 20px;
     color: white;
+    margin-left: 25px;
+    margin-right: 25px;
     
 }
+#guestForm{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "guestLabel nameInput"
+        "guestEmail emailInput"
+        "button button";
+    background-color: rgb(214,20,6, 0.7) ;
+    gap: 10px;
+    border-radius: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    color: white;
+    margin-left: 25px;
+    margin-right: 25px;
+    
+}
+#guestLabel{
+    grid-area: guestLabel;
+}
+#guestName{
+    grid-area: nameInput;
+}
+#emailLabel{
+    grid-area: guestEmail;
+}
+#guestEmail{
+    grid-area: emailInput;
+}
+
 #nameLabel{
     grid-area: nameLabel;
 }
@@ -316,6 +359,22 @@ input{
     width: 300px;
     align-self: center;
     margin-left: 200px;
+}
+button {
+    padding: 8p 14px;
+    cursor: pointer;
+    border: 2px solid #0f172a;
+    box-shadow: 2px 2px 0 0 #ffffff, 4px 4px 0 0 #0f172a;
+    transition-duration: 200ms;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: large
+}
+
+button:hover {
+    box-shadow: 3px 3px #ffffff, 6px 6px 0 0 #0f172a;
+    transform: translate(-2px, -2px);
 }
 
 

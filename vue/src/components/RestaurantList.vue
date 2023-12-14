@@ -216,7 +216,7 @@ export default {
 
 #everything {
   /* background-image: url('https://images.pexels.com/photos/311004/pexels-photo-311004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
-  background: linear-gradient( rgba(135, 25, 25, 0.5), rgba(0, 0, 0, 0.5));
+  background: linear-gradient( rgba(135, 25, 25,1), rgba(0, 0, 0, 0.5));
   background-size: contain;
   background-position: center;
 }
