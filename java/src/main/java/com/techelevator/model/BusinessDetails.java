@@ -20,6 +20,59 @@ public class BusinessDetails {
     private String price;
     private List<BusinessHours> hours;
 
+    //New ones:
+    private List<Category> categories;
+//    private Category category;
+    private String rating;
+    private Location location;
+    @JsonProperty("id")
+    private String business_id;
+
+
+
+    public String getBusiness_id() {
+        return business_id;
+    }
+
+    public void setBusiness_id(String business_id) {
+        this.business_id = business_id;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+
+
+
     public String getDateOpened() {
         return dateOpened;
     }
@@ -94,4 +147,7 @@ public class BusinessDetails {
     public void setTransactions(List<String> transactions) {
         this.transactions = transactions;
     }
+
+
+
 }

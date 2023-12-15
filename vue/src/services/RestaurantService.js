@@ -1,4 +1,5 @@
 import axios from "axios";
+import { computed } from "vue";
 
 const baseUrl = axios.create({
     baseURL: "http://localhost:9000"
@@ -20,12 +21,43 @@ export default{
 
     getRestaurantDetails(restaurantId){
         return baseUrl.get(`/api/restaurants/get-details/${restaurantId}`)
+    }, 
+
+    getOutingByOutingId(outingId){
+        return baseUrl.get(`/api/outings/${outingId}`)
+    }, 
+
+    addOuting(outing){
+        
+
+        // const headers = {
+        //     Authorization: `Bearer ${currentToken}`, 
+        //     'Content-Type': 'application/json'
+        // };
+
+
+        return baseUrl.post('/api/outings/newOuting', outing);
+    }, 
+
+    getOutingsByUserId(userId){
+        return baseUrl.get(`/api/outings/creator/${userId}`)
+    },
+
+    updateRestaurant(restaurantId, restaurant ){
+        return baseUrl.put(`/api/outings/updateVotes/${restaurantId}`, restaurant)
+    }, 
+
+    getOutingFinalists(outingId){
+        return baseUrl.get(`/api/outings/finalists/${outingId}`)
     }
+
+    
 
 
 
 
 
 }
+
 
 

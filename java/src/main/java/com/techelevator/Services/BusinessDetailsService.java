@@ -13,7 +13,7 @@ public class BusinessDetailsService {
     private static final String YELP_API_BASE_URL = "https://api.yelp.com/v3/businesses/";
    private final RestTemplate restTemplate = new RestTemplate();
 
-    private static final String TOKEN = "SsEIu6BdgTyTYdfwMxxNueZ0sQCAJO7BvV0DIM3G9Ol2sFMq5A7qfvWYgkJUW_ifnqalcZYZwXG7oNOfa2alQM4ULb-a-KIXO4zvaAuRIXYRSWcUHo91oJb5lRVqZXYx";
+    private static final String TOKEN = "TdyebAsf0Nmsu6d6SvewUlw-3m4RVxhqc7XKUZCMnFY2IlQN5G_hZaHojL4FXI2JDdRahUm0brFOqwD2_c-SfBtjLNVHkOuknUEweIcjIaJy910hGP4nLQj-8EFqZXYx";
 
 
 
